@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Categories on 靝Sol的博客</title>
+        <title>Categories on 靝Sol</title>
         <link>https://Sophomoresty.github.io/Sophomoresty.io/categories/</link>
-        <description>Recent content in Categories on 靝Sol的博客</description>
+        <description>Recent content in Categories on 靝Sol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>靝Sol</copyright><atom:link href="https://Sophomoresty.github.io/Sophomoresty.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Test</title>
-        <link>https://Sophomoresty.github.io/Sophomoresty.io/categories/test/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <copyright>靝Sol</copyright>
+        <lastBuildDate>Fri, 16 May 2025 15:39:59 +0800</lastBuildDate><atom:link href="https://Sophomoresty.github.io/Sophomoresty.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>C&#43;&#43;</title>
+        <link>https://Sophomoresty.github.io/Sophomoresty.io/categories/c&#43;&#43;/</link>
+        <pubDate>Fri, 16 May 2025 15:39:59 +0800</pubDate>
         
-        <guid>https://Sophomoresty.github.io/Sophomoresty.io/categories/test/</guid>
-        <description>&lt;img src="https://Sophomoresty.github.io/Sophomoresty.io/categories/test/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Test" /&gt;</description>
+        <guid>https://Sophomoresty.github.io/Sophomoresty.io/categories/c&#43;&#43;/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>代码随想录</title>
+        <link>https://Sophomoresty.github.io/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/</link>
+        <pubDate>Fri, 16 May 2025 15:39:59 +0800</pubDate>
+        
+        <guid>https://Sophomoresty.github.io/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/</guid>
+        <description>&lt;img src="https://Sophomoresty.github.io/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/code.jpg" alt="Featured image of post 代码随想录" /&gt;</description>
         </item>
         
     </channel>
