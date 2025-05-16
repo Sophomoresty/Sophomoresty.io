@@ -2,42 +2,54 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Pages on 靝Sol</title>
-        <link>http://localhost:34917/Sophomoresty.io/page/</link>
+        <link>http://localhost:36325/Sophomoresty.io/page/</link>
         <description>Recent content in Pages on 靝Sol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>靝Sol</copyright>
-        <lastBuildDate>Fri, 16 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:34917/Sophomoresty.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 16 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:36325/Sophomoresty.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>档案</title>
-        <link>http://localhost:34917/Sophomoresty.io/archives/</link>
+        <link>http://localhost:36325/Sophomoresty.io/archives/</link>
         <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:34917/Sophomoresty.io/archives/</guid>
+        <guid>http://localhost:36325/Sophomoresty.io/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>关于</title>
-        <link>http://localhost:34917/Sophomoresty.io/about/</link>
+        <link>http://localhost:36325/Sophomoresty.io/about/</link>
         <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:34917/Sophomoresty.io/about/</guid>
-        <description>&lt;p&gt;This is a test page for i18n support.&lt;/p&gt;
+        <guid>http://localhost:36325/Sophomoresty.io/about/</guid>
+        <description>&lt;h2 id=&#34;我的背景&#34;&gt;我的背景
+&lt;/h2&gt;&lt;p&gt;我是Sophomores，目前是四川大学机械工程学院的大三学生。我对计算机科学，特别是深度学习，特别感兴趣。&lt;/p&gt;
+&lt;h2 id=&#34;为什么建立这个博客&#34;&gt;为什么建立这个博客？
+&lt;/h2&gt;&lt;p&gt;这个博客是我记录学习过程、分享技术心得和项目实践的地方。希望通过这种方式巩固知识，并与大家交流。&lt;/p&gt;
+&lt;h2 id=&#34;我的兴趣&#34;&gt;我的兴趣
+&lt;/h2&gt;&lt;p&gt;喜欢编程和 设计&lt;/p&gt;
+&lt;h2 id=&#34;联系方式&#34;&gt;联系方式
+&lt;/h2&gt;&lt;p&gt;您可以通过以下方式联系我：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;邮箱：&lt;a class=&#34;link&#34; href=&#34;mailto:1404462714@qq.com&#34; &gt;1404462714@qq.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;QQ: 1404462714&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;感谢您的来访！&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>搜素</title>
-        <link>http://localhost:34917/Sophomoresty.io/search/</link>
+        <link>http://localhost:36325/Sophomoresty.io/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:34917/Sophomoresty.io/search/</guid>
+        <guid>http://localhost:36325/Sophomoresty.io/search/</guid>
         <description></description>
         </item>
         <item>
         <title>友情链接</title>
-        <link>http://localhost:34917/Sophomoresty.io/links/</link>
+        <link>http://localhost:36325/Sophomoresty.io/links/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:34917/Sophomoresty.io/links/</guid>
+        <guid>http://localhost:36325/Sophomoresty.io/links/</guid>
         <description></description>
         </item>
         
