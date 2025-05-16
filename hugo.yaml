@@ -198,7 +198,6 @@ params:
 ### To remove about, archive and search page menu item, remove `menu` field from their FrontMatter
 menu:
     main: []
-    
 
     social:
         - identifier: github
@@ -253,3 +252,7 @@ markup:
         lineNos: true
         lineNumbersInTable: true
         tabWidth: 4
+
+caches:
+    images:
+        dir: :cacheDir/images
