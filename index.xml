@@ -228,7 +228,17 @@
         <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
         
         <guid>https://Sophomoresty.github.io/Sophomoresty.io/about/</guid>
-        <description>&lt;p&gt;This is a test page for i18n support.&lt;/p&gt;
+        <description>&lt;h2 id=&#34;我的背景&#34;&gt;我的背景
+&lt;/h2&gt;&lt;p&gt;目前是四川大学机械工程学院的大三学生, 对计算机科学，特别是深度学习，特别感兴趣。&lt;/p&gt;
+&lt;h2 id=&#34;为什么建立这个博客&#34;&gt;为什么建立这个博客？
+&lt;/h2&gt;&lt;p&gt;这个博客是我记录学习过程、分享技术心得和项目实践的地方。希望通过这种方式巩固知识，并与大家交流。&lt;/p&gt;
+&lt;h2 id=&#34;我的兴趣&#34;&gt;我的兴趣
+&lt;/h2&gt;&lt;p&gt;喜欢编程和设计。&lt;/p&gt;
+&lt;h2 id=&#34;联系方式&#34;&gt;联系方式
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;邮箱：&lt;a class=&#34;link&#34; href=&#34;mailto:1404462714@qq.com&#34; &gt;1404462714@qq.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;QQ：1404462714&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
