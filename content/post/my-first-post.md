@@ -2,6 +2,7 @@
 date = '2025-05-16T10:40:00+08:00'
 draft = true
 title = 'My First Post'
+image =  "img/code.jpg"
 +++
 ## 简介
 

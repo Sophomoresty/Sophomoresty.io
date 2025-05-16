@@ -1,7 +1,7 @@
 baseurl: "https://Sophomoresty.github.io/Sophomoresty.io/"
 languageCode: zh-cn
 theme: hugo-theme-stack
-title: 靝Sol的博客
+title: 靝Sol
 copyright: 靝Sol
 
 # Theme i18n support
@@ -15,11 +15,11 @@ hasCJKLanguage: true
 languages:
     zh-cn:
         languageName: 中文
-        title: 靝Sol的博客
+        title: 靝Sol
         weight: 1
         params:
             sidebar:
-                subtitle: test
+                subtitle: Be What You Wanna Be
 
 services:
     # Change it to your Disqus shortname before using
@@ -45,7 +45,7 @@ params:
 
     footer:
         since: 2025
-        customText: 欢迎光临
+        customText: 去码头整点薯条
 
     dateFormat:
         published: Jan 02, 2006
@@ -53,7 +53,7 @@ params:
 
     sidebar:
         emoji: 🍥
-        subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        subtitle: Be What You Wanna Be
         avatar:
             enabled: true
             local: true
@@ -167,12 +167,12 @@ params:
             - type: toc
 
     opengraph:
-        twitter:
-            # Your Twitter username
-            site:
+        # twitter:
+        #     # Your Twitter username
+        #     site:
 
-            # Available values: summary, summary_large_image
-            card: summary_large_image
+        #     # Available values: summary, summary_large_image
+        #     card: summary_large_image
 
     defaultImage:
         opengraph:
@@ -204,13 +204,13 @@ menu:
           name: GitHub
           url: https://github.com/Sophomoresty
           params:
-              icon: brand-github
+              icon: github
 
-        - identifier: twitter
-          name: Twitter
-          url: https://twitter.com
+        - identifier: bilibili
+          name: Bilibili
+          url: https://www.bilibili.com/
           params:
-              icon: brand-twitter
+              icon: bilibili
 
 related:
     includeNewer: true

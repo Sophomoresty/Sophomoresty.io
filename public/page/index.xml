@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Pages on 靝Sol的博客</title>
-        <link>https://Sophomoresty.github.io/Sophomoresty.io/page/</link>
-        <description>Recent content in Pages on 靝Sol的博客</description>
+        <title>Pages on 靝Sol</title>
+        <link>http://localhost:34917/Sophomoresty.io/page/</link>
+        <description>Recent content in Pages on 靝Sol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>靝Sol</copyright>
-        <lastBuildDate>Fri, 16 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://Sophomoresty.github.io/Sophomoresty.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 16 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:34917/Sophomoresty.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>档案</title>
-        <link>https://Sophomoresty.github.io/Sophomoresty.io/archives/</link>
+        <link>http://localhost:34917/Sophomoresty.io/archives/</link>
         <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://Sophomoresty.github.io/Sophomoresty.io/archives/</guid>
+        <guid>http://localhost:34917/Sophomoresty.io/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>关于</title>
-        <link>https://Sophomoresty.github.io/Sophomoresty.io/about/</link>
+        <link>http://localhost:34917/Sophomoresty.io/about/</link>
         <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://Sophomoresty.github.io/Sophomoresty.io/about/</guid>
+        <guid>http://localhost:34917/Sophomoresty.io/about/</guid>
         <description>&lt;p&gt;This is a test page for i18n support.&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>搜素</title>
-        <link>https://Sophomoresty.github.io/Sophomoresty.io/search/</link>
+        <link>http://localhost:34917/Sophomoresty.io/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://Sophomoresty.github.io/Sophomoresty.io/search/</guid>
+        <guid>http://localhost:34917/Sophomoresty.io/search/</guid>
         <description></description>
         </item>
         <item>
         <title>友情链接</title>
-        <link>https://Sophomoresty.github.io/Sophomoresty.io/links/</link>
+        <link>http://localhost:34917/Sophomoresty.io/links/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://Sophomoresty.github.io/Sophomoresty.io/links/</guid>
+        <guid>http://localhost:34917/Sophomoresty.io/links/</guid>
         <description></description>
         </item>
         
