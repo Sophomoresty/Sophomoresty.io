@@ -1,7 +1,7 @@
 ---
 date: "2025-05-16T15:39:59+08:00"
 title: "代码随想录_day_1_二分查找边界"
-image: "img/lucy_1.png"
+image: "img/code.jpg"
 license: false
 categories:
   - "代码随想录"

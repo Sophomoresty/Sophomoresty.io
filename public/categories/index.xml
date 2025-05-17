@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Categories on 靝Sol</title>
-        <link>http://localhost:36325/Sophomoresty.io/categories/</link>
+        <link>http://localhost:1313/Sophomoresty.io/categories/</link>
         <description>Recent content in Categories on 靝Sol</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>靝Sol</copyright>
-        <lastBuildDate>Fri, 16 May 2025 15:39:59 +0800</lastBuildDate><atom:link href="http://localhost:36325/Sophomoresty.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 17 May 2025 20:31:55 +0800</lastBuildDate><atom:link href="http://localhost:1313/Sophomoresty.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>C&#43;&#43;</title>
-        <link>http://localhost:36325/Sophomoresty.io/categories/c&#43;&#43;/</link>
-        <pubDate>Fri, 16 May 2025 15:39:59 +0800</pubDate>
+        <link>http://localhost:1313/Sophomoresty.io/categories/c&#43;&#43;/</link>
+        <pubDate>Sat, 17 May 2025 20:31:55 +0800</pubDate>
         
-        <guid>http://localhost:36325/Sophomoresty.io/categories/c&#43;&#43;/</guid>
+        <guid>http://localhost:1313/Sophomoresty.io/categories/c&#43;&#43;/</guid>
         <description></description>
         </item>
         <item>
         <title>代码随想录</title>
-        <link>http://localhost:36325/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/</link>
-        <pubDate>Fri, 16 May 2025 15:39:59 +0800</pubDate>
+        <link>http://localhost:1313/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/</link>
+        <pubDate>Sat, 17 May 2025 20:31:55 +0800</pubDate>
         
-        <guid>http://localhost:36325/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/</guid>
-        <description>&lt;img src="http://localhost:36325/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/code.jpg" alt="Featured image of post 代码随想录" /&gt;</description>
+        <guid>http://localhost:1313/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/</guid>
+        <description>&lt;img src="http://localhost:1313/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/code.jpg" alt="Featured image of post 代码随想录" /&gt;</description>
         </item>
         
     </channel>
