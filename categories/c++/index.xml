@@ -7,13 +7,77 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>靝Sol</copyright>
-        <lastBuildDate>Fri, 16 May 2025 15:39:59 +0800</lastBuildDate><atom:link href="https://Sophomoresty.github.io/Sophomoresty.io/categories/c++/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 17 May 2025 20:31:55 +0800</lastBuildDate><atom:link href="https://Sophomoresty.github.io/Sophomoresty.io/categories/c++/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>代码随想录_day_4_链表</title>
+        <link>https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day_4_%E9%93%BE%E8%A1%A8/</link>
+        <pubDate>Sat, 17 May 2025 20:31:55 +0800</pubDate>
+        
+        <guid>https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day_4_%E9%93%BE%E8%A1%A8/</guid>
+        <description>&lt;img src="https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg" alt="Featured image of post 代码随想录_day_4_链表" /&gt;&lt;h2 id=&#34;今日bb&#34;&gt;今日BB
+&lt;/h2&gt;&lt;p&gt;前天在配置wsl环境和博客, 昨天只做了&lt;code&gt;区间和开发商问题&lt;/code&gt;, 链表的任务全部拖到今天解决了, 花了大半天写完了, 链表还剩链表相交, 今天没时间做了.&lt;/p&gt;
+&lt;h2 id=&#34;数组收获&#34;&gt;数组收获
+&lt;/h2&gt;&lt;p&gt;开发商题目中最大收获就是在处理行/列分割的时候, 可以用行, 列前缀和处理.&lt;/p&gt;
+&lt;p&gt;我最原始的思路是n行m列矩阵, 如果按行分割, 这里约定被分割的行及其前面的都属于前一部分的, 列分割同理, 那行分割的序号可以从1到n-1, 按照矩阵的索引来说, 就是 &lt;code&gt;0&lt;/code&gt; 到 &lt;code&gt;n-2&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;比如3行的矩阵&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;行分割索引为0, 则分割为[0], [1,2]&lt;/li&gt;
+&lt;li&gt;行分割索引为1, 则分割为[0,1],[2]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;同理列分割的索引可以从0到n-2.&lt;/p&gt;
+&lt;p&gt;想到这里的时候, 我是想把分割后的差值的绝对值求出来, 最后一起求最小值, 但是非常繁琐. 看了卡哥的代码豁然开朗.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;INT_MAX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;horizontalCut&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;horizontalCut&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;horizontal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;abs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sum&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;horizontalCut&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;horizontalCut&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;verticalCut&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;j&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;j&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;j&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;verticalCut&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vertical&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;j&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;abs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sum&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;verticalCut&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;verticalCut&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;resu&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;horizontal&lt;/code&gt; 和 &lt;code&gt;vertical&lt;/code&gt;是前面算出来的矩阵的每行, 毎列的和. &lt;code&gt;sum&lt;/code&gt;是矩阵所有元素的和, 这里最开始看不懂的是&lt;code&gt;horizontalCut&lt;/code&gt;干嘛的.&lt;/p&gt;
+&lt;p&gt;实际上思路和我们前面是一样的, 要求&lt;code&gt;分割后的差值&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;i=0&lt;/code&gt;, &lt;code&gt;horizontalCut&lt;/code&gt;为第1行的和, 而&lt;code&gt;sum - horizontalCut&lt;/code&gt;即为2,3行的和.&lt;/p&gt;
+&lt;p&gt;所以&lt;code&gt;i=0&lt;/code&gt;时, &lt;code&gt;sum - horizontalCut - horizontalCut&lt;/code&gt;即是分割索引为0时, 上下两部分的差值.&lt;/p&gt;
+&lt;p&gt;这里的for循环即是把所有分割的可能的差值求出来, 每次都在更新&lt;code&gt;result&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;美中不足的是, &lt;code&gt;i &amp;lt; n&lt;/code&gt;不是最精确的范围:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;i = n-1&lt;/code&gt;时, &lt;code&gt;horizontal&lt;/code&gt;是全部行的和, 这个分割的差值显然是0, 逻辑完善的话, for循环条件应为 &lt;code&gt;i &amp;lt; n - 1&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;链表收获&#34;&gt;链表收获
+&lt;/h2&gt;&lt;p&gt;今天链表比较欠缺的部分是 设计链表 是用不含size属性实现的, 后续要做含size属性的以及双链表.&lt;/p&gt;
+&lt;p&gt;之前以为数据结构学过链表, 这里没啥问题. 结果在设计链表的边界处理, 犯了很多错误:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在链表尾处添加节点, 没有考虑到空节点的情况&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;两两交换链表中的节点和环形链表中都用了步长为2的指针, 这里最需要注意的就是快指针的边界处理, 很容易操作空指针.&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>代码随想录_day_1_二分查找边界</title>
         <link>https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day_1_%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E8%BE%B9%E7%95%8C/</link>
         <pubDate>Fri, 16 May 2025 15:39:59 +0800</pubDate>
         
         <guid>https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day_1_%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E8%BE%B9%E7%95%8C/</guid>
-        <description>&lt;img src="https://Sophomoresty.github.io/Sophomoresty.io/img/lucy_1.png" alt="Featured image of post 代码随想录_day_1_二分查找边界" /&gt;&lt;h2 id=&#34;今日收获&#34;&gt;今日收获
+        <description>&lt;img src="https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg" alt="Featured image of post 代码随想录_day_1_二分查找边界" /&gt;&lt;h2 id=&#34;今日收获&#34;&gt;今日收获
 &lt;/h2&gt;&lt;p&gt;基础题1-6都做完了, 比想象中的简单. 今天学习到最多的就是力扣编号34的, 在排序数组中查找元素的第一个和最后一个位置.&lt;/p&gt;
 &lt;p&gt;我原本以为这个和二分查找一样简单, 但发现这个是用二分查找边界. 和卡哥在二分查找的循环变量不同, 思考了2个小时才搞懂, 特此记录下笔记.&lt;/p&gt;
 &lt;h2 id=&#34;二分查找边界思路&#34;&gt;二分查找边界思路

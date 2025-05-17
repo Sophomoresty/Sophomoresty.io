@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head><script src="/Sophomoresty.io/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Sophomoresty.io/livereload" data-no-instant defer></script><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="简介 这是 粗体 文本，这是 斜体 文本。\n访问 Hugo 网站！\n测试\n">
-<title>My First Post</title>
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="今日BB 前天在配置wsl环境和博客, 昨天只做了区间和开发商问题, 链表的任务全部拖到今天解决了, 花了大半天写完了, 链表还剩链表相交, 今天没时间做了.\n数组收获 开发商题目中最大收获就是在处理行/列分割的时候, 可以用行, 列前缀和处理.\n">
+<title>代码随想录_day_4_链表</title>
 
-<link rel='canonical' href='http://localhost:1313/Sophomoresty.io/p/my-first-post/'>
+<link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day_4_%E9%93%BE%E8%A1%A8/'>
 
-<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="My First Post">
-<meta property='og:description' content="简介 这是 粗体 文本，这是 斜体 文本。\n访问 Hugo 网站！\n测试\n">
-<meta property='og:url' content='http://localhost:1313/Sophomoresty.io/p/my-first-post/'>
+<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="代码随想录_day_4_链表">
+<meta property='og:description' content="今日BB 前天在配置wsl环境和博客, 昨天只做了区间和开发商问题, 链表的任务全部拖到今天解决了, 花了大半天写完了, 链表还剩链表相交, 今天没时间做了.\n数组收获 开发商题目中最大收获就是在处理行/列分割的时候, 可以用行, 列前缀和处理.\n">
+<meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day_4_%E9%93%BE%E8%A1%A8/'>
 <meta property='og:site_name' content='靝Sol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-16T10:40:00&#43;08:00'/><meta property='article:modified_time' content='2025-05-16T10:40:00&#43;08:00'/><meta property='og:image' content='http://localhost:1313/Sophomoresty.io/img/code.jpg' />
-<meta name="twitter:title" content="My First Post">
-<meta name="twitter:description" content="简介 这是 粗体 文本，这是 斜体 文本。\n访问 Hugo 网站！\n测试\n"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/Sophomoresty.io/img/code.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-17T20:31:55&#43;08:00'/><meta property='article:modified_time' content='2025-05-17T20:31:55&#43;08:00'/><meta property='og:image' content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
+<meta name="twitter:title" content="代码随想录_day_4_链表">
+<meta name="twitter:description" content="今日BB 前天在配置wsl环境和博客, 昨天只做了区间和开发商问题, 链表的任务全部拖到今天解决了, 花了大半天写完了, 链表还剩链表相交, 今天没时间做了.\n数组收获 开发商题目中最大收获就是在处理行/列分割的时候, 可以用行, 列前缀和处理.\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
     <link rel="shortcut icon" href="/lucy.ico" />
 
     </head>
@@ -234,15 +234,48 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#今日bb">今日BB</a></li>
+    <li><a href="#数组收获">数组收获</a></li>
+    <li><a href="#链表收获">链表收获</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/Sophomoresty.io/p/my-first-post/">
+            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day_4_%E9%93%BE%E8%A1%A8/">
                 
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" alt="Featured image of post My First Post" />
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" alt="Featured image of post 代码随想录_day_4_链表" />
                 
             </a>
         </div>
@@ -250,10 +283,22 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" >
+                代码随想录
+            </a>
+        
+            <a href="/Sophomoresty.io/categories/c&#43;&#43;/" >
+                C&#43;&#43;
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/Sophomoresty.io/p/my-first-post/">My First Post</a>
+            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day_4_%E9%93%BE%E8%A1%A8/">代码随想录_day_4_链表</a>
         </h2>
     
         
@@ -275,7 +320,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">May 16, 2025</time>
+                <time class="article-time--published">May 17, 2025</time>
             </div>
         
 
@@ -290,7 +335,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 2 分钟
                 </time>
             </div>
         
@@ -305,11 +350,62 @@
     <section class="article-content">
     
     
-    <h2 id="简介">简介
-</h2><p>这是 <strong>粗体</strong> 文本，这是 <em>斜体</em> 文本。</p>
-<p>访问 <a class="link" href="https://gohugo.io"  target="_blank" rel="noopener"
-    >Hugo</a> 网站！</p>
-<p>测试</p>
+    <h2 id="今日bb">今日BB
+</h2><p>前天在配置wsl环境和博客, 昨天只做了<code>区间和开发商问题</code>, 链表的任务全部拖到今天解决了, 花了大半天写完了, 链表还剩链表相交, 今天没时间做了.</p>
+<h2 id="数组收获">数组收获
+</h2><p>开发商题目中最大收获就是在处理行/列分割的时候, 可以用行, 列前缀和处理.</p>
+<p>我最原始的思路是n行m列矩阵, 如果按行分割, 这里约定被分割的行及其前面的都属于前一部分的, 列分割同理, 那行分割的序号可以从1到n-1, 按照矩阵的索引来说, 就是 <code>0</code> 到 <code>n-2</code>.</p>
+<p>比如3行的矩阵</p>
+<ul>
+<li>行分割索引为0, 则分割为[0], [1,2]</li>
+<li>行分割索引为1, 则分割为[0,1],[2]</li>
+</ul>
+<p>同理列分割的索引可以从0到n-2.</p>
+<p>想到这里的时候, 我是想把分割后的差值的绝对值求出来, 最后一起求最小值, 但是非常繁琐. 看了卡哥的代码豁然开朗.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">horizontalCut</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">horizontalCut</span> <span class="o">+=</span> <span class="n">horizontal</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">abs</span><span class="p">(</span><span class="n">sum</span> <span class="o">-</span> <span class="n">horizontalCut</span> <span class="o">-</span> <span class="n">horizontalCut</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">verticalCut</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">verticalCut</span> <span class="o">+=</span> <span class="n">vertical</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">abs</span><span class="p">(</span><span class="n">sum</span> <span class="o">-</span> <span class="n">verticalCut</span> <span class="o">-</span> <span class="n">verticalCut</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">resu</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>horizontal</code> 和 <code>vertical</code>是前面算出来的矩阵的每行, 毎列的和. <code>sum</code>是矩阵所有元素的和, 这里最开始看不懂的是<code>horizontalCut</code>干嘛的.</p>
+<p>实际上思路和我们前面是一样的, 要求<code>分割后的差值</code>.</p>
+<p><code>i=0</code>, <code>horizontalCut</code>为第1行的和, 而<code>sum - horizontalCut</code>即为2,3行的和.</p>
+<p>所以<code>i=0</code>时, <code>sum - horizontalCut - horizontalCut</code>即是分割索引为0时, 上下两部分的差值.</p>
+<p>这里的for循环即是把所有分割的可能的差值求出来, 每次都在更新<code>result</code>.</p>
+<p>美中不足的是, <code>i &lt; n</code>不是最精确的范围:</p>
+<p><code>i = n-1</code>时, <code>horizontal</code>是全部行的和, 这个分割的差值显然是0, 逻辑完善的话, for循环条件应为 <code>i &lt; n - 1</code>.</p>
+<h2 id="链表收获">链表收获
+</h2><p>今天链表比较欠缺的部分是 设计链表 是用不含size属性实现的, 后续要做含size属性的以及双链表.</p>
+<p>之前以为数据结构学过链表, 这里没啥问题. 结果在设计链表的边界处理, 犯了很多错误:</p>
+<ul>
+<li>在链表尾处添加节点, 没有考虑到空节点的情况</li>
+</ul>
+<p>两两交换链表中的节点和环形链表中都用了步长为2的指针, 这里最需要注意的就是快指针的边界处理, 很容易操作空指针.</p>
 
 </section>
 
@@ -317,18 +413,6 @@
     <footer class="article-footer">
     
 
-    
-    <section class="article-copyright">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
-</svg>
-
-
-
-        <span>Licensed under CC BY-NC-SA 4.0</span>
-    </section>
     </footer>
 
 
@@ -338,6 +422,34 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day_1_%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E8%BE%B9%E7%95%8C/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day_1_二分查找边界</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
@@ -495,7 +607,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/Sophomoresty.io/ts/main.1c02e4aa6ead26b9bc25666a87b687dd9229212b4d3932bc0deda8ffc95fd64b.js" defer></script>
+            </script><script type="text/javascript" src="/Sophomoresty.io/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
