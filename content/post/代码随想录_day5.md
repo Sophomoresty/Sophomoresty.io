@@ -18,7 +18,7 @@ categories = [
 
 对unicode的情况进行处理
 
-### 1.暴力解法
+### 1. 暴力解法
 
 ```cpp
 // 暴力解法
@@ -53,7 +53,7 @@ bool baoli_isAnagram(string s, string t) {
 }
 ```
 
-### 2.数组哈希解法_最优解
+### 2. 数组哈希解法_最优解
 
 ```cpp
 // 只处理小写字母, 而不是unicode编码, 小写字母的ascii码有26个,
@@ -84,7 +84,7 @@ bool isAnagram(string s, string t) {
 
 ## 2_两个数组的交集_leetcode_349
 
-### 1.暴力解法
+### 1. 暴力解法
 
 ```cpp
 // 用1个额外的数组存储交点 (这个做法是错误的, 数组无法去重)
@@ -139,7 +139,7 @@ vector<int> intersection(vector<int> &nums1, vector<int> &nums2) {
 }
 ```
 
-### 3.数组+哈希集合_最优解
+### 3. 数组+哈希集合_最优解
 
 ```cpp
 // 最优解
@@ -174,7 +174,7 @@ vector<int> better_intersection(vector<int> &nums1, vector<int> &nums2) {
 
 ## 3_快乐数_leetcode_202
 
-### 1.哈希集合法
+### 1. 哈希集合法
 
 ```cpp
 int get_sum(int n) {
@@ -204,7 +204,7 @@ bool isHappy(int n) {
 
 ```
 
-### 2.快慢指针法_最优解
+### 2. 快慢指针法_最优解
 
 - 自己最初写的, 写的很繁琐, 没要考虑到fast和slow, 无论是有解还是无解, 最终都要相等, 有解的情况下相等值为1, 无解的情况下相等值非1
 
@@ -268,7 +268,7 @@ bool better_2_isHappy(int n) {
 
 ## 4_两数之和_leetcode_1
 
-### 1.暴力解法
+### 1. 暴力解法
 
 ```cpp
 vector<int> baoli_twoSum(vector<int> &nums, int target) {
@@ -284,7 +284,7 @@ vector<int> baoli_twoSum(vector<int> &nums, int target) {
 }
 ```
 
-### 2.map解法_最优解
+### 2. map解法_最优解
 
 ```cpp
 vector<int> twoSum(vector<int> &nums, int target) {
