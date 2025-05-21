@@ -1,6 +1,6 @@
 ---
 date: "2025-05-17T20:31:55+08:00"
-title: "代码随想录_day_4_链表"
+title: "代码随想录_day4_链表"
 image: "img/code.jpg"
 license: false
 categories:
