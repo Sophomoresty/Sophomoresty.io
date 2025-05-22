@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day6/'>
 
-<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="代码随想录_day6">
+<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="代码随想录_day6">
 <meta property='og:description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n最近复习压力比较大, 没有时间做笔记和额外训练, 目前只做了大概的最优解, 后面二轮的时候要补充完\n5_四数相加II_leetcode_454 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 #include &lt;unordered_map&gt; #include &lt;vector&gt; using namespace std; class Solution { public: // // 哈希法 int fourSumCount(vector&lt;int&gt; &amp;nums1, vector&lt;int&gt; &amp;nums2, vector&lt;int&gt; &amp;nums3, vector&lt;int&gt; &amp;nums4) { // 初始定义map unordered_map&lt;int, int&gt; res_map; // 遍历数组1,2, 对map进行初始化 for (auto a : nums1) { for (auto b : nums2) { auto it = res_map.find(a + b); // unordered_map在创建未存在的键的时候会自动初始赋值为0, // 所以不需要手动初始化 不存在则value赋值为1 // 存在则value++ res_map[a + b]++; } } // 定义符合条件的四元组个数 int count = 0; // 遍历数组3,4,在map中找对应的target的value for (auto c : nums3) { for (auto d : nums4) { int target = 0 - (c + d); auto it = res_map.find(target); // 找到的情况下 if (it != res_map.end()) { count += res_map[target]; // } } } return count; } }; 6_赎金信_leetcode_383 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 #include &lt;cstdio&gt; #include &lt;iostream&gt; #include &lt;string&gt; #include &lt;vector&gt; using namespace std; class Solution { public: bool canConstruct(string ransomNote, string magazine) { // ransomNote 和 magazine 由小写英文字母组成 // 可以用长度26的数组作为哈希表, magazing出现过的字符, 对应值+1, // for循环遍历ransomNote, 看哈希表中有没有对应的字符 vector&lt;int&gt; res_vec(26, 0); for (auto i : magazine) { res_vec[i - &#39;a&#39;]++; } for (auto i : ransomNote) { if (res_vec[i - &#39;a&#39;] &gt; 0) { res_vec[i - &#39;a&#39;]--; } else { return false; } } return true; } }; int main() { string ransomNote = &#34;aa&#34;; string magazine = &#34;aab&#34;; Solution sol; bool flag = sol.canConstruct(ransomNote, magazine); // canConstruct(&#34;a&#34;, &#34;b&#34;) -&gt; false printf(&#34;canConstruct(\\&#34;%s\\&#34;, \\&#34;%s\\&#34;) -&gt; %s\\n&#34;, ransomNote.c_str(), magazine.c_str(), flag ? &#34;true&#34; : &#34;false&#34;); return 0; } 7_三数之和_leetcoe_15 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 #include &lt;algorithm&gt; #include &lt;vector&gt; using namespace std; class Solution { public: vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt; &amp;nums) { // 0. 处理边界情况：如果元素数量不足3个，直接返回空 if (nums.size() &lt; 3) { return {}; } // 最后返回的值是多个三元组, 三元组的内容设为[i,j,k], ijk的和为0, // 且ijk的序号不能相同, 三元组不能重复 // 对数组进行排序 sort(nums.begin(), nums.end()); // 如果最小值大于0, 也就以为三元组不可能存在, 返回空; if (nums[0] &gt; 0) { return {}; } vector&lt;vector&lt;int&gt;&gt; res_vec; // 对数组进行遍历 // 使用i, left, right就是为了避免序号相同 // 对i, left, right去重, 是为了避免三元组重复 for (int i = 0; i &lt; nums.size() - 2; i++) { // 进入循环前需要去i的重, 重复的情况下结束本次循环 if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) { continue; } // 定义left和right指针 int left = i + 1; int right = nums.size() - 1; // right指针永远指向末尾会不会重复? 不会, 因为i去重了 // 因为序号不能相同, 也就是退出循环时, right =left while (right &gt; left) { int temp = nums[i] + nums[left] + nums[right]; if (temp &gt; 0) { right--; } else if (temp &lt; 0) { left++; } // temp = 0; else { res_vec.push_back({nums[i], nums[left], nums[right]}); // 当i,left,right的值刚好为0时, 此时i是固定的, // 如果只动right或则left, 是找不到值的 也就是这种情况下, // 为了找继续可能存在的值, left和right都必须收缩 do { left++; } // 对left和while去重, 必须用循环处理, 退出条件是前后不相等, // 这有可能导致right和left错位 // 综上, 循环条件是前后相等 且 left &lt; right while (nums[left] == nums[left - 1] &amp;&amp; left &lt; right); do { right--; } while (nums[right] == nums[right + 1] &amp;&amp; left &lt; right); } } } return res_vec; } }; 8_四数之和_leetcode_18 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 #include &lt;algorithm&gt; #include &lt;cstddef&gt; #include &lt;iostream&gt; #include &lt;vector&gt; using namespace std; class Solution { public: vector&lt;vector&lt;int&gt;&gt; one_fourSum(vector&lt;int&gt; &amp;nums, int target) { vector&lt;vector&lt;int&gt;&gt; res_vec; // vector初始化的数组为空 sort(nums.begin(), nums.end()); // 0.处理边界情况 if (nums.size() &lt; 4) { return {}; } // i最多到nums.size()-4 for (int i = 0; i &lt; nums.size() - 3; i++) { // 1.1 i剪枝 // target大于0的情况下, nums[i]如果大于target, 则无解, // 而且意味着后续的i也无解, 所以要结束循环, 而不是结束本次循环 // target &gt;= 0 , nums[i]可否等于target // target =0的情况下, num[i]=target=0,后续的值也可以找到四元组, // 比如{0,0,0,0}, 因为数组单调不减 // 总结 // target=0 , nums[i] &gt; target // target &gt;0的情况, nums[i] &gt;=target if (target == 0 &amp;&amp; nums[i] &gt; target || target &gt; 0 &amp;&amp; nums[i] &gt;= target) { break; } // 1.2 i去重 // i重复的情况下, 结束本次循环 if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) { continue; } for (int j = i + 1; j &lt; nums.size() - 2; j++) { // 2.1 j 剪枝 // 在有i的基础上, 如果targe &gt;= 0, nums[i] + nums[j] &gt;= target // &gt;=0 ,也就意味着不可能是目标的四元组 if (target == 0 &amp;&amp; nums[i] + nums[j] &gt; target || target &gt; 0 &amp;&amp; nums[i] + nums[j] &gt;= target) { break; } // 2.2 j去重 // j &gt; 1 &amp;&amp; nums[j] == nums[j - 1]) // 这个去重逻辑有问题,i和j的值可以相等 // 实际上这里要避免的是i和j同时和上一轮的相同 // 也就是结束循环的条件是j&gt;1, i和上一轮的相同且j和上一轮相同 // i的初始值是0, j的初始值是1, 也就是j要大于1 if (j &gt; i + 1 &amp;&amp; nums[j] == nums[j - 1]) { continue; } int left = j + 1; int right = nums.size() - 1; while (left &lt; right) { long long temp = (long long)nums[i] + nums[j] + nums[left] + nums[right]; if (temp &gt; target) right--; else if (temp &lt; target) left++; // temp=target else { // 添加四元组 res_vec.push_back( {nums[i], nums[j], nums[left], nums[right]}); // 去重 do { left++; } while (nums[left] == nums[left - 1] &amp;&amp; left &lt; right); do { right--; } while (nums[right] == nums[right + 1] &amp;&amp; left &lt; right); }; } } } return res_vec; } vector&lt;vector&lt;int&gt;&gt; fourSum(vector&lt;int&gt; &amp;nums, int target) { vector&lt;vector&lt;int&gt;&gt; res_vec; if (nums.size() &lt; 4) return res_vec; sort(nums.begin(), nums.end()); size_t length = nums.size(); for (int i = 0; i &lt; length - 3; i++) { // 1.剪枝 // 最小的组合都大于target ,无解, break if ((long long)nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] &gt; target) { break; } // 初始值加最大的三个组合都小于target, 说明当前值肯定不行 if ((long long)nums[i] + nums[length - 3] + nums[length - 2] + nums[length - 1] &lt; target) { continue; } if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) { continue; } for (int j = i + 1; j &lt; length - 2; j++) { if ((long long)nums[i] + nums[j] + nums[j + 1] + nums[j + 2] &gt; target) { break; } if ((long long)nums[i] + nums[j] + nums[length - 2] + nums[length - 1] &lt; target) { continue; } if (j &gt; i + 1 &amp;&amp; nums[j] == nums[j - 1]) { continue; } int left = j + 1; int right = nums.size() - 1; while (left &lt; right) { long long sum = (long long)nums[i] + nums[j] + nums[left] + nums[right]; if (sum &gt; target) { right--; } else if (sum &lt; target) { left++; } else { res_vec.push_back( {nums[i], nums[j], nums[left], nums[right]}); do { left++; } while (left &lt; right &amp;&amp; nums[left] == nums[left - 1]); do { right--; } while (left &lt; right &amp;&amp; nums[right] == nums[right + 1]); } } } } return res_vec; } }; int main() { vector&lt;int&gt; nums = {-2, -1, -1, 1, 2, 2}; int target = 0; Solution sol; vector&lt;vector&lt;int&gt;&gt; res_vec = sol.fourSum(nums, target); for (auto i : res_vec) { cout &lt;&lt; &#34;[&#34;; for (auto j : i) { cout &lt;&lt; j &lt;&lt; &#34;, &#34;; } cout &lt;&lt; &#34;]&#34; &lt;&lt; &#39;\\n&#39;; } } ">
 <meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day6/'>
 <meta property='og:site_name' content='靝Sol'>
@@ -1018,6 +1018,25 @@
             
                 
 <article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day8/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day8</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day7/">
         
         
@@ -1087,25 +1106,6 @@
 
         <div class="article-details">
             <h2 class="article-title">Leetcode_面试题_0207_链表相交</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day4_%E9%93%BE%E8%A1%A8/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">代码随想录_day4_链表</h2>
         </div>
     </a>
 </article>

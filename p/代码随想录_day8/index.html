@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="双指针法1(卡哥思路) 思路和总结 把链表想象为一根绳子, 让绳子右端点对齐\n1.分别遍历A,B两个链表, 得出A,B的长度 2.让长链表的初始指针移动到, 和短链表初始指针对齐\n本次题暴露了自己循环体理解的问题, while和for是等价的\n">
-<title>Leetcode_面试题_0207_链表相交</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } ">
+<title>代码随想录_day8</title>
 
-<link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/leetcode_%E9%9D%A2%E8%AF%95%E9%A2%98_0207_%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/'>
+<link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day8/'>
 
-<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Leetcode_面试题_0207_链表相交">
-<meta property='og:description' content="双指针法1(卡哥思路) 思路和总结 把链表想象为一根绳子, 让绳子右端点对齐\n1.分别遍历A,B两个链表, 得出A,B的长度 2.让长链表的初始指针移动到, 和短链表初始指针对齐\n本次题暴露了自己循环体理解的问题, while和for是等价的\n">
-<meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/leetcode_%E9%9D%A2%E8%AF%95%E9%A2%98_0207_%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/'>
+<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="代码随想录_day8">
+<meta property='og:description' content="4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } ">
+<meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day8/'>
 <meta property='og:site_name' content='靝Sol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-18T16:22:06&#43;08:00'/><meta property='article:modified_time' content='2025-05-18T16:22:06&#43;08:00'/><meta property='og:image' content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
-<meta name="twitter:title" content="Leetcode_面试题_0207_链表相交">
-<meta name="twitter:description" content="双指针法1(卡哥思路) 思路和总结 把链表想象为一根绳子, 让绳子右端点对齐\n1.分别遍历A,B两个链表, 得出A,B的长度 2.让长链表的初始指针移动到, 和短链表初始指针对齐\n本次题暴露了自己循环体理解的问题, while和for是等价的\n"><meta name="twitter:card" content="summary_large_image">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-22T20:58:14&#43;08:00'/><meta property='article:modified_time' content='2025-05-22T20:58:14&#43;08:00'/><meta property='og:image' content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
+<meta name="twitter:title" content="代码随想录_day8">
+<meta name="twitter:description" content="4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } "><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
     <link rel="shortcut icon" href="/lucy.ico" />
 
@@ -256,24 +256,7 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#双指针法1卡哥思路">双指针法1(卡哥思路)</a>
-      <ol>
-        <li><a href="#思路和总结">思路和总结</a></li>
-        <li><a href="#代码">代码</a></li>
-      </ol>
-    </li>
-    <li><a href="#双指针法2">双指针法2</a>
-      <ol>
-        <li><a href="#思路和总结-1">思路和总结</a></li>
-        <li><a href="#代码-1">代码</a></li>
-      </ol>
-    </li>
-    <li><a href="#暴力解法">暴力解法</a>
-      <ol>
-        <li><a href="#总结">总结</a></li>
-        <li><a href="#代码-2">代码</a></li>
-      </ol>
-    </li>
+    <li><a href="#4_翻转字符串里的单词_leetcode_151">4_翻转字符串里的单词_leetcode_151</a></li>
   </ol>
 </nav>
         </div>
@@ -288,9 +271,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/Sophomoresty.io/p/leetcode_%E9%9D%A2%E8%AF%95%E9%A2%98_0207_%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/">
+            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day8/">
                 
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" alt="Featured image of post Leetcode_面试题_0207_链表相交" />
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" alt="Featured image of post 代码随想录_day8" />
                 
             </a>
         </div>
@@ -313,7 +296,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/Sophomoresty.io/p/leetcode_%E9%9D%A2%E8%AF%95%E9%A2%98_0207_%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/">Leetcode_面试题_0207_链表相交</a>
+            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day8/">代码随想录_day8</a>
         </h2>
     
         
@@ -335,7 +318,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">May 18, 2025</time>
+                <time class="article-time--published">May 22, 2025</time>
             </div>
         
 
@@ -350,7 +333,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 3 分钟
+                    阅读时长: 1 分钟
                 </time>
             </div>
         
@@ -365,16 +348,8 @@
     <section class="article-content">
     
     
-    <h2 id="双指针法1卡哥思路">双指针法1(卡哥思路)
-</h2><h3 id="思路和总结">思路和总结
-</h3><p>把链表想象为一根绳子, 让绳子右端点对齐</p>
-<p>1.分别遍历A,B两个链表, 得出A,B的长度
-2.让长链表的初始指针移动到, 和短链表初始指针对齐</p>
-<p>本次题暴露了自己循环体理解的问题, while和for是等价的</p>
-<p>写好循环体, 一般是通过<code>对应关系</code>去写条件</p>
-<p>对应关系: <code>本次循环体刚进来的判别的对象</code> 和 <code>对应的变化值</code></p>
-<h3 id="代码">代码
-</h3><div class="highlight"><div class="chroma">
+    <h2 id="4_翻转字符串里的单词_leetcode_151">4_翻转字符串里的单词_leetcode_151
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -431,186 +406,73 @@
 </span><span class="lnt">53
 </span><span class="lnt">54
 </span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ListNode</span> <span class="o">*</span><span class="n">getIntersectionNode</span><span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span><span class="n">headA</span><span class="p">,</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">headB</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 处理长度为0的情况
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">headA</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">||</span> <span class="n">headB</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 1. 计算链表长度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 链表的索引从0开始
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ListNode</span> <span class="o">*</span><span class="n">curA</span><span class="p">,</span> <span class="o">*</span><span class="n">curB</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">curA</span> <span class="o">=</span> <span class="n">headA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">len_A</span><span class="p">,</span> <span class="n">len_B</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">len_A</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">len_B</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// curA是判别对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="n">curA</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">curA</span> <span class="o">=</span> <span class="n">curA</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">len_A</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// 索引 0 -&gt; 长度 1, 正确
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">curB</span> <span class="o">=</span> <span class="n">headB</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">curB</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">curB</span> <span class="o">=</span> <span class="n">curB</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">len_B</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 2. 重置指针
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">curA</span> <span class="o">=</span> <span class="n">headA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">curB</span> <span class="o">=</span> <span class="n">headB</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 3. 将长链表的指针向前移动长度差的步数进行对齐
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">len_A</span> <span class="o">&gt;</span> <span class="n">len_B</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// 从0移动到LA-LB,步数为LA-LB
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">len_A</span> <span class="o">-</span> <span class="n">len_B</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">curA</span> <span class="o">=</span> <span class="n">curA</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">len_A</span> <span class="o">&lt;</span> <span class="n">len_B</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">len_B</span> <span class="o">-</span> <span class="n">len_A</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">curB</span> <span class="o">=</span> <span class="n">curB</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 现在curA和curB在同一起点, 同时出发
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">curA</span> <span class="o">!=</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">curB</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">curA</span> <span class="o">==</span> <span class="n">curB</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">curA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="n">curA</span> <span class="o">=</span> <span class="n">curA</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">curB</span> <span class="o">=</span> <span class="n">curB</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="双指针法2">双指针法2
-</h2><h3 id="思路和总结-1">思路和总结
-</h3><p>设A独有的长度为a, 和B相同的部分为c;
-设B独有长度为b, 和A相同的部分为c;
-让A,B链表拼接在一起.</p>
-<p>1 A,B有相同的部分</p>
-<ul>
-<li>urA 从 A 端出发, curB 从 B 端出发,</li>
-<li>curA 第一次到达相同部分, 移动的距离是<code>a-1</code></li>
-<li>curA 第二次到达相同部分, 移动的距离是<code>a+c-1+b</code></li>
-<li>curB 第一次到达相同的部分, 移动的距离是<code>b-1</code></li>
-<li>curB 第二次到达相同的部分, 移动的距离是<code>b+c-1+a</code></li>
-</ul>
-<p>即A,B有相同的部分, 它们一定会移动相同的距离 <code>a+b+c-1</code>, 遇到第一个相等的对象.</p>
-<p>2 A, B没有相同的部分</p>
-<p>A,B会走完全程, 遇到1个相等的对象 nullptr</p>
-<p>总结:
-通过让两个指针走的总路程相等(LA+LB)，它们一定会在某个时刻相遇。
-而这个相遇点，必然是它们第一次同时到达的、在两条“加长”路径上具有相同相对位置的那个点，也就是<code>相交点</code>（如果存在的话），或者最终的 <code>nullptr</code>（如果不相交的话）。</p>
-<h3 id="代码-1">代码
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ListNode</span> <span class="o">*</span><span class="n">getIntersectionNode</span><span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span><span class="n">headA</span><span class="p">,</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">headB</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">headA</span> <span class="o">||</span> <span class="o">!</span><span class="n">headB</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span> <span class="o">*</span><span class="n">curA</span><span class="p">,</span> <span class="o">*</span><span class="n">curB</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">curA</span> <span class="o">=</span> <span class="n">headA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">curB</span> <span class="o">=</span> <span class="n">headB</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 循环退出条件, curA, curB相等
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="n">curA</span> <span class="o">!=</span> <span class="n">curB</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">curA</span> <span class="o">=</span> <span class="n">curA</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">?</span> <span class="nl">headB</span> <span class="p">:</span> <span class="n">curA</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">curB</span> <span class="o">=</span> <span class="n">curB</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">?</span> <span class="nl">headA</span> <span class="p">:</span> <span class="n">curB</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">curA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="暴力解法">暴力解法
-</h2><h3 id="总结">总结
-</h3><p>原始错误</p>
-<p>循环嵌套需要初始化curB, 此前没有初始化curB</p>
-<h3 id="代码-2">代码
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ListNode</span> <span class="o">*</span><span class="n">getIntersectionNode</span><span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span><span class="n">headA</span><span class="p">,</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">headB</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 0个节点
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">headA</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">||</span> <span class="n">headB</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 暴力解法, 同时遍历A和B, 有个相等时即return
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ListNode</span> <span class="o">*</span><span class="n">curA</span> <span class="o">=</span> <span class="n">headA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">curA</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ListNode</span> <span class="o">*</span><span class="n">curB</span> <span class="o">=</span> <span class="n">headB</span><span class="p">;</span> <span class="c1">// 注意要初始化
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">while</span> <span class="p">(</span><span class="n">curB</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">curA</span> <span class="o">==</span> <span class="n">curB</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="n">curA</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">reverseWords</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 1.去除空格
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">slow</span><span class="p">,</span> <span class="n">fast</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">slow</span> <span class="o">=</span> <span class="n">fast</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">fast</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">fast</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// fast遇到的不是空格, 也就是我们要加入新数组中的元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 除了第一个单词, 其余单词的首字母前面都要加个空格
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">fast</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 处理首字母
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">// slow==0, 意味着此时加入的是第1个单词
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">slow</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">s</span><span class="p">[</span><span class="n">slow</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">fast</span><span class="o">++</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">                <span class="n">curB</span> <span class="o">=</span> <span class="n">curB</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// slow !=0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">s</span><span class="p">[</span><span class="n">slow</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 处理该单词剩余的字母, 这里主要fast不要超出s.size()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">while</span> <span class="p">(</span><span class="n">fast</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">fast</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">s</span><span class="p">[</span><span class="n">slow</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">fast</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="n">curA</span> <span class="o">=</span> <span class="n">curA</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// slow是新字符串的长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">s</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">slow</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 反转整个字符串, 再反转每个不含空格的子串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2.反转整个字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 现在是反转空格隔开的子串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">begin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3.反转子串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 最后一个单词后面没有空格
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">begin</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">begin</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 反转后更新字符串的起始点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">begin</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;   the       sky       is blue!              &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s_res</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">reverseWords</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s_res</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -634,25 +496,6 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day8/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">代码随想录_day8</h2>
-        </div>
-    </a>
-</article>
-
             
                 
 <article class="has-image">
@@ -725,6 +568,25 @@
 
         <div class="article-details">
             <h2 class="article-title">leetcode_707_设计链表_用size和tail</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/leetcode_%E9%9D%A2%E8%AF%95%E9%A2%98_0207_%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Leetcode_面试题_0207_链表相交</h2>
         </div>
     </a>
 </article>

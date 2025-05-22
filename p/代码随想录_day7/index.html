@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day7/'>
 
-<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="代码随想录_day7">
+<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="代码随想录_day7">
 <meta property='og:description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n1_反转字符串I_leetcode_344 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 #include &lt;vector&gt; using namespace std; class Solution { private: void swapString(vector&lt;char&gt; &amp;s, int left, int right) { char temp = s[left]; s[left] = s[right]; s[right] = temp; } public: void reverseString(vector&lt;char&gt; &amp;s) { int left, right; for (left = 0, right = s.size() - 1; left &lt; right; left++, right--) { swapString(s, left, right); } } }; 2_反转字符串II_leetcode_541 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 #include &lt;string&gt; using namespace std; class Solution { public: void swapString(string &amp;s, int left, int right) { char temp = s[left]; s[left] = s[right]; s[right] = temp; } // 反转left到right的字符串, 是闭区间 void reverseString(string &amp;s, int left, int right) { for (; left &lt; right; left++, right--) { swapString(s, left, right); } } string reverseStr(string s, int k) { for (int i = 0; i &lt; s.size(); i += 2 * k) { // 反转前k个, 条件是i+k不超出s.size() if (i + k &lt; s.size()) { this-&gt;reverseString(s, i, i + k - 1); } // 如果剩下的没有k个, 反转剩下的 else { this-&gt;reverseString(s, i, s.size() - 1); } } return s; } }; 3_替换数字 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; int main() { string s; while (cin &gt;&gt; s) { int old_len = s.size(); int count = 0; // 1.统计字符中数字出现的次数 for (auto i : s) { if (i &gt;= &#39;0&#39; &amp;&amp; i &lt;= &#39;9&#39;) { count++; } } // 2.每个数字都要替换成number, 也就以为着数组增加5*count s.resize(old_len + 5 * count); int new_len = s.size(); // 用双指针遍历 int left, right; for (left = old_len - 1, right = new_len - 1; left &gt; -1; left--) { // left的内容是数字 if (s[left] &gt;= &#39;0&#39; &amp;&amp; s[left] &lt;= &#39;9&#39;) { s[right--] = &#39;r&#39;; s[right--] = &#39;e&#39;; s[right--] = &#39;b&#39;; s[right--] = &#39;m&#39;; s[right--] = &#39;u&#39;; s[right--] = &#39;n&#39;; } // left的内容是非数字 else { s[right--] = s[left]; } } cout &lt;&lt; s &lt;&lt; endl; } } ">
 <meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day7/'>
 <meta property='og:site_name' content='靝Sol'>
@@ -585,6 +585,25 @@
             
                 
 <article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day8/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day8</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day6/">
         
         
@@ -654,25 +673,6 @@
 
         <div class="article-details">
             <h2 class="article-title">Leetcode_面试题_0207_链表相交</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day4_%E9%93%BE%E8%A1%A8/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">代码随想录_day4_链表</h2>
         </div>
     </a>
 </article>
