@@ -133,7 +133,7 @@ params:
             repo: "Sophomoresty/Sophomoresty.io"
             repoID: "R_kgDOOq9B4A"
             category: "Announcements"
-            categoryID: "DIC_kwDOOq9B4M4CqN6o" 
+            categoryID: "DIC_kwDOOq9B4M4CqN6o"
             mapping: "pathname"
             lightTheme: "github-light"
             darkTheme: "github-dark"
@@ -192,6 +192,9 @@ params:
             enabled: true
         content:
             enabled: true
+    mermaid: true
+    # custom_js:
+    #     - /js/mermaid-custom.js # 注意路径是从 static 目录开始的相对路径
 
 ### Custom menu
 ### See https://stack.jimmycai.com/config/menu
