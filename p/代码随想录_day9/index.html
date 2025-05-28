@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="今日BB 前天在配置wsl环境和博客, 昨天只做了区间和开发商问题, 链表的任务全部拖到今天解决了, 花了大半天写完了, 链表还剩链表相交, 今天没时间做了.\n数组收获 开发商题目中最大收获就是在处理行/列分割的时候, 可以用行, 列前缀和处理.\n">
-<title>代码随想录_day4_链表</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } ">
+<title>代码随想录_day9</title>
 
-<link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day4_%E9%93%BE%E8%A1%A8/'>
+<link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day9/'>
 
-<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="代码随想录_day4_链表">
-<meta property='og:description' content="今日BB 前天在配置wsl环境和博客, 昨天只做了区间和开发商问题, 链表的任务全部拖到今天解决了, 花了大半天写完了, 链表还剩链表相交, 今天没时间做了.\n数组收获 开发商题目中最大收获就是在处理行/列分割的时候, 可以用行, 列前缀和处理.\n">
-<meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day4_%E9%93%BE%E8%A1%A8/'>
+<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="代码随想录_day9">
+<meta property='og:description' content="4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } ">
+<meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day9/'>
 <meta property='og:site_name' content='靝Sol'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-17T20:31:55&#43;08:00'/><meta property='article:modified_time' content='2025-05-17T20:31:55&#43;08:00'/><meta property='og:image' content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
-<meta name="twitter:title" content="代码随想录_day4_链表">
-<meta name="twitter:description" content="今日BB 前天在配置wsl环境和博客, 昨天只做了区间和开发商问题, 链表的任务全部拖到今天解决了, 花了大半天写完了, 链表还剩链表相交, 今天没时间做了.\n数组收获 开发商题目中最大收获就是在处理行/列分割的时候, 可以用行, 列前缀和处理.\n"><meta name="twitter:card" content="summary_large_image">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-22T20:58:14&#43;08:00'/><meta property='article:modified_time' content='2025-05-22T20:58:14&#43;08:00'/><meta property='og:image' content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
+<meta name="twitter:title" content="代码随想录_day9">
+<meta name="twitter:description" content="4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } "><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
     <link rel="shortcut icon" href="/lucy.ico" />
 
@@ -256,9 +256,7 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#今日bb">今日BB</a></li>
-    <li><a href="#数组收获">数组收获</a></li>
-    <li><a href="#链表收获">链表收获</a></li>
+    <li><a href="#4_翻转字符串里的单词_leetcode_151">4_翻转字符串里的单词_leetcode_151</a></li>
   </ol>
 </nav>
         </div>
@@ -273,9 +271,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day4_%E9%93%BE%E8%A1%A8/">
+            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day9/">
                 
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" alt="Featured image of post 代码随想录_day4_链表" />
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" alt="Featured image of post 代码随想录_day9" />
                 
             </a>
         </div>
@@ -298,7 +296,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day4_%E9%93%BE%E8%A1%A8/">代码随想录_day4_链表</a>
+            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day9/">代码随想录_day9</a>
         </h2>
     
         
@@ -320,7 +318,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">May 17, 2025</time>
+                <time class="article-time--published">May 22, 2025</time>
             </div>
         
 
@@ -335,7 +333,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 2 分钟
+                    阅读时长: 1 分钟
                 </time>
             </div>
         
@@ -350,19 +348,8 @@
     <section class="article-content">
     
     
-    <h2 id="今日bb">今日BB
-</h2><p>前天在配置wsl环境和博客, 昨天只做了<code>区间和开发商问题</code>, 链表的任务全部拖到今天解决了, 花了大半天写完了, 链表还剩链表相交, 今天没时间做了.</p>
-<h2 id="数组收获">数组收获
-</h2><p>开发商题目中最大收获就是在处理行/列分割的时候, 可以用行, 列前缀和处理.</p>
-<p>我最原始的思路是n行m列矩阵, 如果按行分割, 这里约定被分割的行及其前面的都属于前一部分的, 列分割同理, 那行分割的序号可以从1到n-1, 按照矩阵的索引来说, 就是 <code>0</code> 到 <code>n-2</code>.</p>
-<p>比如3行的矩阵</p>
-<ul>
-<li>行分割索引为0, 则分割为[0], [1,2]</li>
-<li>行分割索引为1, 则分割为[0,1],[2]</li>
-</ul>
-<p>同理列分割的索引可以从0到n-2.</p>
-<p>想到这里的时候, 我是想把分割后的差值的绝对值求出来, 最后一起求最小值, 但是非常繁琐. 看了卡哥的代码豁然开朗.</p>
-<div class="highlight"><div class="chroma">
+    <h2 id="4_翻转字符串里的单词_leetcode_151">4_翻转字符串里的单词_leetcode_151
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -376,37 +363,119 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">horizontalCut</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">horizontalCut</span> <span class="o">+=</span> <span class="n">horizontal</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">abs</span><span class="p">(</span><span class="n">sum</span> <span class="o">-</span> <span class="n">horizontalCut</span> <span class="o">-</span> <span class="n">horizontalCut</span><span class="p">));</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">reverseWords</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 1.去除空格
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">slow</span><span class="p">,</span> <span class="n">fast</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">slow</span> <span class="o">=</span> <span class="n">fast</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">fast</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">fast</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// fast遇到的不是空格, 也就是我们要加入新数组中的元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 除了第一个单词, 其余单词的首字母前面都要加个空格
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">fast</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 处理首字母
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">// slow==0, 意味着此时加入的是第1个单词
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">slow</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">s</span><span class="p">[</span><span class="n">slow</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">fast</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// slow !=0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">s</span><span class="p">[</span><span class="n">slow</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 处理该单词剩余的字母, 这里主要fast不要超出s.size()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">while</span> <span class="p">(</span><span class="n">fast</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">fast</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">s</span><span class="p">[</span><span class="n">slow</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">fast</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// slow是新字符串的长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">s</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">slow</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 反转整个字符串, 再反转每个不含空格的子串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2.反转整个字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 现在是反转空格隔开的子串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">begin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3.反转子串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 最后一个单词后面没有空格
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">begin</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">begin</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 反转后更新字符串的起始点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">begin</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">verticalCut</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">verticalCut</span> <span class="o">+=</span> <span class="n">vertical</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">abs</span><span class="p">(</span><span class="n">sum</span> <span class="o">-</span> <span class="n">verticalCut</span> <span class="o">-</span> <span class="n">verticalCut</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">resu</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;   the       sky       is blue!              &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s_res</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">reverseWords</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s_res</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>horizontal</code> 和 <code>vertical</code>是前面算出来的矩阵的每行, 毎列的和. <code>sum</code>是矩阵所有元素的和, 这里最开始看不懂的是<code>horizontalCut</code>干嘛的.</p>
-<p>实际上思路和我们前面是一样的, 要求<code>分割后的差值</code>.</p>
-<p><code>i=0</code>, <code>horizontalCut</code>为第1行的和, 而<code>sum - horizontalCut</code>即为2,3行的和.</p>
-<p>所以<code>i=0</code>时, <code>sum - horizontalCut - horizontalCut</code>即是分割索引为0时, 上下两部分的差值.</p>
-<p>这里的for循环即是把所有分割的可能的差值求出来, 每次都在更新<code>result</code>.</p>
-<p>美中不足的是, <code>i &lt; n</code>不是最精确的范围:</p>
-<p><code>i = n-1</code>时, <code>horizontal</code>是全部行的和, 这个分割的差值显然是0, 逻辑完善的话, for循环条件应为 <code>i &lt; n - 1</code>.</p>
-<h2 id="链表收获">链表收获
-</h2><p>今天链表比较欠缺的部分是 设计链表 是用不含size属性实现的, 后续要做含size属性的以及双链表.</p>
-<p>之前以为数据结构学过链表, 这里没啥问题. 结果在设计链表的边界处理, 犯了很多错误:</p>
-<ul>
-<li>在链表尾处添加节点, 没有考虑到空节点的情况</li>
-</ul>
-<p>两两交换链表中的节点和环形链表中都用了步长为2的指针, 这里最需要注意的就是快指针的边界处理, 很容易操作空指针.</p>
-
+</div>
 </section>
 
 
@@ -468,25 +537,6 @@
             
                 
 <article class="has-image">
-    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day9/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">代码随想录_day9</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
     <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day8/">
         
         
@@ -518,6 +568,25 @@
 
         <div class="article-details">
             <h2 class="article-title">代码随想录_day7</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day6/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day6</h2>
         </div>
     </a>
 </article>
