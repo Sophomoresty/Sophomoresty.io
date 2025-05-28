@@ -1,5 +1,5 @@
 +++
-date = '2025-05-22T20:58:14+08:00'
+date = '2025-05-22T12:11:29+08:00'
 draft = false
 title = '代码随想录_day8'
 image = "img/code.jpg"
@@ -10,68 +10,113 @@ categories = [
 ]
 +++
 
+代码仓库: <https://github.com/Sophomoresty/Algorithm_Exercises.git>
 
-## 4_翻转字符串里的单词_leetcode_151
+## 1_反转字符串I_leetcode_344
 
 ```cpp
-#include <algorithm>
-#include <iostream>
+#include <vector>
+using namespace std;
+class Solution {
+
+private:
+    void swapString(vector<char> &s, int left, int right) {
+        char temp = s[left];
+        s[left] = s[right];
+        s[right] = temp;
+    }
+
+public:
+    void reverseString(vector<char> &s) {
+        int left, right;
+        for (left = 0, right = s.size() - 1; left < right; left++, right--) {
+            swapString(s, left, right);
+        }
+    }
+};
+```
+
+## 2_反转字符串II_leetcode_541
+
+```cpp
 #include <string>
+
 using namespace std;
 
 class Solution {
 public:
-    string reverseWords(string s) {
-        // 1.去除空格
-        int slow, fast;
-        for (slow = fast = 0; fast < s.size(); fast++) {
-            // fast遇到的不是空格, 也就是我们要加入新数组中的元素
-            // 除了第一个单词, 其余单词的首字母前面都要加个空格
-            if (s[fast] != ' ') {
-                // 处理首字母
-                // slow==0, 意味着此时加入的是第1个单词
-                if (slow == 0) {
-                    s[slow++] = s[fast++];
-                }
-                // slow !=0
-                else {
-                    s[slow++] = ' ';
-                }
-                // 处理该单词剩余的字母, 这里主要fast不要超出s.size()
-                while (fast < s.size() && s[fast] != ' ') {
-                    s[slow++] = s[fast++];
-                }
-            }
+    void swapString(string &s, int left, int right) {
+        char temp = s[left];
+        s[left] = s[right];
+        s[right] = temp;
+    }
+    // 反转left到right的字符串, 是闭区间
+    void reverseString(string &s, int left, int right) {
+        for (; left < right; left++, right--) {
+            swapString(s, left, right);
         }
-        // slow是新字符串的长度
-        s.resize(slow);
+    }
 
-        // 反转整个字符串, 再反转每个不含空格的子串
+    string reverseStr(string s, int k) {
 
-        // 2.反转整个字符串
-        reverse(s.begin(), s.end());
-        // 现在是反转空格隔开的子串
-        int begin = 0;
-        // 3.反转子串
-        for (int i = 0; i < s.size(); i++) {
-            // 最后一个单词后面没有空格
-            if (s[i] == ' ') {
-                reverse(s.begin() + begin, s.begin() + i);
-                begin = i + 1;
-                // 反转后更新字符串的起始点
+        for (int i = 0; i < s.size(); i += 2 * k) {
+            // 反转前k个, 条件是i+k不超出s.size()
+
+            if (i + k < s.size()) {
+                this->reverseString(s, i, i + k - 1);
             }
-            if (i == s.size() - 1) {
-                reverse(s.begin() + begin, s.end());
+            // 如果剩下的没有k个, 反转剩下的
+            else {
+                this->reverseString(s, i, s.size() - 1);
             }
         }
         return s;
     }
 };
+```
+
+## 3_替换数字
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 int main() {
-    string s = "   the       sky       is blue!              ";
-    Solution sol;
-    string s_res = sol.reverseWords(s);
-    cout << s_res << '\n';
+    string s;
+    while (cin >> s) {
+        int old_len = s.size();
+        int count = 0;
+        // 1.统计字符中数字出现的次数
+        for (auto i : s) {
+            if (i >= '0' && i <= '9') {
+                count++;
+            }
+        }
+        // 2.每个数字都要替换成number, 也就以为着数组增加5*count
+        s.resize(old_len + 5 * count);
+        int new_len = s.size();
+
+        // 用双指针遍历
+        int left, right;
+        for (left = old_len - 1, right = new_len - 1; left > -1; left--) {
+            // left的内容是数字
+            if (s[left] >= '0' && s[left] <= '9') {
+                s[right--] = 'r';
+                s[right--] = 'e';
+                s[right--] = 'b';
+                s[right--] = 'm';
+                s[right--] = 'u';
+                s[right--] = 'n';
+            }
+            // left的内容是非数字
+
+            else {
+                s[right--] = s[left];
+            }
+        }
+        cout << s << endl;
+    }
 }
 ```
