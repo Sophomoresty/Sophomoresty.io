@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 1 2 3 4 timeline 2025-05-30 : 去江安体测 2025-06-06 : 企业资源管理考试&lt;br&gt;(晚上7-9点，基教C104) 2025-06-08 : 数值分析项目报告 1_用栈实现队列_leetcode_232 你说的“out栈前面加入了元素，实际上in后面加入了元素，不用着急马上加入到out栈，等out栈元素空了再一起加入，这样可以保证先进先出”这个描述非常准确地概括了核心优化逻辑。 没错，关键就在于：\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="1_用栈实现队列_leetcode_232 你说的“out栈前面加入了元素，实际上in后面加入了元素，不用着急马上加入到out栈，等out栈元素空了再一起加入，这样可以保证先进先出”这个描述非常准确地概括了核心优化逻辑。 没错，关键就在于：\n">
 <title>代码随想录_day10</title>
 
 <link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day10/'>
 
 <link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="代码随想录_day10">
-<meta property='og:description' content=" 1 2 3 4 timeline 2025-05-30 : 去江安体测 2025-06-06 : 企业资源管理考试&lt;br&gt;(晚上7-9点，基教C104) 2025-06-08 : 数值分析项目报告 1_用栈实现队列_leetcode_232 你说的“out栈前面加入了元素，实际上in后面加入了元素，不用着急马上加入到out栈，等out栈元素空了再一起加入，这样可以保证先进先出”这个描述非常准确地概括了核心优化逻辑。 没错，关键就在于：\n">
+<meta property='og:description' content="1_用栈实现队列_leetcode_232 你说的“out栈前面加入了元素，实际上in后面加入了元素，不用着急马上加入到out栈，等out栈元素空了再一起加入，这样可以保证先进先出”这个描述非常准确地概括了核心优化逻辑。 没错，关键就在于：\n">
 <meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day10/'>
 <meta property='og:site_name' content='靝Sol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-27T15:08:36&#43;08:00'/><meta property='article:modified_time' content='2025-05-27T15:08:36&#43;08:00'/><meta property='og:image' content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
 <meta name="twitter:title" content="代码随想录_day10">
-<meta name="twitter:description" content=" 1 2 3 4 timeline 2025-05-30 : 去江安体测 2025-06-06 : 企业资源管理考试&lt;br&gt;(晚上7-9点，基教C104) 2025-06-08 : 数值分析项目报告 1_用栈实现队列_leetcode_232 你说的“out栈前面加入了元素，实际上in后面加入了元素，不用着急马上加入到out栈，等out栈元素空了再一起加入，这样可以保证先进先出”这个描述非常准确地概括了核心优化逻辑。 没错，关键就在于：\n"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="1_用栈实现队列_leetcode_232 你说的“out栈前面加入了元素，实际上in后面加入了元素，不用着急马上加入到out栈，等out栈元素空了再一起加入，这样可以保证先进先出”这个描述非常准确地概括了核心优化逻辑。 没错，关键就在于：\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
     <link rel="shortcut icon" href="/lucy.ico" />
 
@@ -351,21 +351,7 @@
     <section class="article-content">
     
     
-    <div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">timeline
-</span></span><span class="line"><span class="cl">2025-05-30 : 去江安体测
-</span></span><span class="line"><span class="cl">2025-06-06 : 企业资源管理考试&lt;br&gt;(晚上7-9点，基教C104)
-</span></span><span class="line"><span class="cl">2025-06-08 : 数值分析项目报告
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="1_用栈实现队列_leetcode_232">1_用栈实现队列_leetcode_232
+    <h2 id="1_用栈实现队列_leetcode_232">1_用栈实现队列_leetcode_232
 </h2><p>你说的“out栈前面加入了元素，实际上in后面加入了元素，不用着急马上加入到out栈，等out栈元素空了再一起加入，这样可以保证先进先出”这个描述非常准确地概括了核心优化逻辑。
 没错，关键就在于：</p>
 <p>push 操作只管往 stack_in 里塞。 这代表着新来的元素，它们暂时不用关心出队顺序。</p>
@@ -854,6 +840,25 @@
             
                 
 <article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day11/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day11</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day8/">
         
         
@@ -923,25 +928,6 @@
 
         <div class="article-details">
             <h2 class="article-title">代码随想录_day5</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/Sophomoresty.io/p/leetcode_707_%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8_%E7%94%A8size%E5%92%8Ctail/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">leetcode_707_设计链表_用size和tail</h2>
         </div>
     </a>
 </article>
