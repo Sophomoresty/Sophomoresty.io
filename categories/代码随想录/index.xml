@@ -8,12 +8,12 @@
         <language>zh-cn</language>
         <copyright>靝Sol</copyright>
         <lastBuildDate>Fri, 30 May 2025 20:48:03 +0800</lastBuildDate><atom:link href="https://Sophomoresty.github.io/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>代码随想录_day12</title>
-        <link>https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day12/</link>
+        <title>代码随想录_day13</title>
+        <link>https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day13/</link>
         <pubDate>Fri, 30 May 2025 20:48:03 +0800</pubDate>
         
-        <guid>https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day12/</guid>
-        <description>&lt;img src="https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg" alt="Featured image of post 代码随想录_day12" /&gt;&lt;p&gt;代码仓库: &lt;a class=&#34;link&#34; href=&#34;https://github.com/Sophomoresty/Algorithm_Exercises.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day13/</guid>
+        <description>&lt;img src="https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg" alt="Featured image of post 代码随想录_day13" /&gt;&lt;p&gt;代码仓库: &lt;a class=&#34;link&#34; href=&#34;https://github.com/Sophomoresty/Algorithm_Exercises.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://github.com/Sophomoresty/Algorithm_Exercises.git&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;总结gemini&#34;&gt;总结(Gemini)
 &lt;/h2&gt;&lt;p&gt;好的，我们来系统地总结一下目前为止我们关于&lt;strong&gt;二叉树和 N 叉树&lt;/strong&gt;的全部讨论。这个主题内容非常丰富，涵盖了树的基础概念、各种遍历方法及其非递归实现、以及相关的 LeetCode 题目和优化技巧。&lt;/p&gt;
