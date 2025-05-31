@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } ">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } 5_右旋字符 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; int main() { ios_base::sync_with_stdio(false); cin.tie(nullptr); int k; string s; cin &gt;&gt; k; cin &gt;&gt; s; reverse(s.begin(), s.end()); reverse(s.begin(), s.begin() + k); reverse(s.begin() + k, s.end()); cout &lt;&lt; s &lt;&lt; &#39;\\n&#39;; } 6_实现strStr_leetcode_28 非常重要 1. KMP 算法的核心思想 目标： 在主串 haystack 中查找模式串 needle 的第一次出现位置。 朴素算法的低效： 当模式串失配时，朴素算法会同时回溯主串和模式串指针，导致重复比较。 KMP 的优化： 在失配时，不回溯主串指针 i。 仅仅根据模式串自身的结构信息（通过 next 数组），高效地回溯模式串指针 j，让模式串在主串上“滑动”，避免重复比较，从而实现线性的时间复杂度。 2. next 数组 (LPS 数组) 的构建 (get_next 函数) next 数组是 KMP 算法的“灵魂”，它存储了模式串自身的匹配信息，用于指导失配时的回溯。\n">
 <title>代码随想录_day9</title>
 
 <link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day9/'>
 
 <link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="代码随想录_day9">
-<meta property='og:description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } ">
+<meta property='og:description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } 5_右旋字符 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; int main() { ios_base::sync_with_stdio(false); cin.tie(nullptr); int k; string s; cin &gt;&gt; k; cin &gt;&gt; s; reverse(s.begin(), s.end()); reverse(s.begin(), s.begin() + k); reverse(s.begin() + k, s.end()); cout &lt;&lt; s &lt;&lt; &#39;\\n&#39;; } 6_实现strStr_leetcode_28 非常重要 1. KMP 算法的核心思想 目标： 在主串 haystack 中查找模式串 needle 的第一次出现位置。 朴素算法的低效： 当模式串失配时，朴素算法会同时回溯主串和模式串指针，导致重复比较。 KMP 的优化： 在失配时，不回溯主串指针 i。 仅仅根据模式串自身的结构信息（通过 next 数组），高效地回溯模式串指针 j，让模式串在主串上“滑动”，避免重复比较，从而实现线性的时间复杂度。 2. next 数组 (LPS 数组) 的构建 (get_next 函数) next 数组是 KMP 算法的“灵魂”，它存储了模式串自身的匹配信息，用于指导失配时的回溯。\n">
 <meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day9/'>
 <meta property='og:site_name' content='靝Sol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-22T20:58:14&#43;08:00'/><meta property='article:modified_time' content='2025-05-22T20:58:14&#43;08:00'/><meta property='og:image' content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
 <meta name="twitter:title" content="代码随想录_day9">
-<meta name="twitter:description" content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } "><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } 5_右旋字符 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; int main() { ios_base::sync_with_stdio(false); cin.tie(nullptr); int k; string s; cin &gt;&gt; k; cin &gt;&gt; s; reverse(s.begin(), s.end()); reverse(s.begin(), s.begin() + k); reverse(s.begin() + k, s.end()); cout &lt;&lt; s &lt;&lt; &#39;\\n&#39;; } 6_实现strStr_leetcode_28 非常重要 1. KMP 算法的核心思想 目标： 在主串 haystack 中查找模式串 needle 的第一次出现位置。 朴素算法的低效： 当模式串失配时，朴素算法会同时回溯主串和模式串指针，导致重复比较。 KMP 的优化： 在失配时，不回溯主串指针 i。 仅仅根据模式串自身的结构信息（通过 next 数组），高效地回溯模式串指针 j，让模式串在主串上“滑动”，避免重复比较，从而实现线性的时间复杂度。 2. next 数组 (LPS 数组) 的构建 (get_next 函数) next 数组是 KMP 算法的“灵魂”，它存储了模式串自身的匹配信息，用于指导失配时的回溯。\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
     <link rel="shortcut icon" href="/lucy.ico" />
 
@@ -257,6 +257,24 @@
             <nav id="TableOfContents">
   <ol>
     <li><a href="#4_翻转字符串里的单词_leetcode_151">4_翻转字符串里的单词_leetcode_151</a></li>
+    <li><a href="#5_右旋字符">5_右旋字符</a></li>
+    <li><a href="#6_实现strstr_leetcode_28-非常重要">6_实现strStr_leetcode_28 非常重要</a>
+      <ol>
+        <li><a href="#1-kmp-算法的核心思想">1. KMP 算法的核心思想</a></li>
+        <li><a href="#2-next-数组-lps-数组-的构建-get_next-函数">2. <code>next</code> 数组 (LPS 数组) 的构建 (<code>get_next</code> 函数)</a></li>
+        <li><a href="#3-kmp-匹配过程-strstr-函数">3. KMP 匹配过程 (<code>strStr</code> 函数)</a></li>
+        <li><a href="#4-kmp-的核心原理j">4. KMP 的核心原理：<strong><code>j</code> 维护的不变式</strong></a></li>
+      </ol>
+    </li>
+    <li><a href="#7_重复的子字符串_leetcode_459-非常重要">7_重复的子字符串_leetcode_459 非常重要</a>
+      <ol>
+        <li><a href="#1-问题核心思路利用-next-数组的最后一位">1. 问题核心思路：利用 <code>next</code> 数组的最后一位</a></li>
+        <li><a href="#2-关键数学原理n---l-是最小重复单元的长度">2. 关键数学原理：<code>n - L</code> 是最小重复单元的长度</a></li>
+        <li><a href="#3-完整的判断条件">3. 完整的判断条件</a></li>
+        <li><a href="#4-kmp-算法的核心机制复习">4. KMP 算法的核心机制复习</a></li>
+        <li><a href="#5循环不变量与算法的优雅">5.循环不变量与算法的优雅</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -333,7 +351,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 9 分钟
                 </time>
             </div>
         
@@ -477,6 +495,410 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="5_右旋字符">5_右旋字符
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ios_base</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6_实现strstr_leetcode_28-非常重要">6_实现strStr_leetcode_28 非常重要
+</h2><h3 id="1-kmp-算法的核心思想">1. KMP 算法的核心思想
+</h3><ol>
+<li><strong>目标：</strong> 在主串 <code>haystack</code> 中查找模式串 <code>needle</code> 的第一次出现位置。</li>
+<li><strong>朴素算法的低效：</strong> 当模式串失配时，朴素算法会同时回溯主串和模式串指针，导致重复比较。</li>
+<li><strong>KMP 的优化：</strong>
+<ul>
+<li>在失配时，<strong>不回溯主串指针 <code>i</code></strong>。</li>
+<li>仅仅根据模式串自身的结构信息（通过 <code>next</code> 数组），高效地<strong>回溯模式串指针 <code>j</code></strong>，让模式串在主串上“滑动”，避免重复比较，从而实现线性的时间复杂度。</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-next-数组-lps-数组-的构建-get_next-函数">2. <code>next</code> 数组 (LPS 数组) 的构建 (<code>get_next</code> 函数)
+</h3><p><code>next</code> 数组是 KMP 算法的“灵魂”，它存储了模式串自身的匹配信息，用于指导失配时的回溯。</p>
+<ol>
+<li>
+<p><strong>真前缀 (Proper Prefix) 与 真后缀 (Proper Suffix) 的含义：</strong></p>
+<ul>
+<li><strong>真前缀：</strong> 指一个字符串<strong>不包括其自身</strong>的所有前缀。
+<ul>
+<li>例如，对于字符串 <code>&quot;abc&quot;</code>：
+<ul>
+<li>前缀有：<code>&quot;&quot;</code> (空字符串), <code>&quot;a&quot;</code>, <code>&quot;ab&quot;</code>, <code>&quot;abc&quot;</code></li>
+<li><strong>真前缀</strong>有：<code>&quot;&quot;</code>, <code>&quot;a&quot;</code>, <code>&quot;ab&quot;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>真后缀：</strong> 指一个字符串<strong>不包括其自身</strong>的所有后缀。
+<ul>
+<li>例如，对于字符串 <code>&quot;abc&quot;</code>：
+<ul>
+<li>后缀有：<code>&quot;&quot;</code> (空字符串), <code>&quot;c&quot;</code>, <code>&quot;bc&quot;</code>, <code>&quot;abc&quot;</code></li>
+<li><strong>真后缀</strong>有：<code>&quot;&quot;</code>, <code>&quot;c&quot;</code>, <code>&quot;bc&quot;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>next[i]</code> 的精确含义：</strong></p>
+<ul>
+<li><code>next[i]</code> 表示模式串 <code>needle</code> 中，<strong>以 <code>i</code> 为结尾字符</strong>的<strong>前缀子串 <code>needle[0...i]</code></strong>，它<strong>最长相等真前缀和真后缀的长度</strong>。</li>
+<li><strong>示例：</strong> 对于 <code>needle = &quot;ababa&quot;</code>：
+<ul>
+<li><code>next[0]</code> (for <code>&quot;a&quot;</code>) = 0</li>
+<li><code>next[1]</code> (for <code>&quot;ab&quot;</code>) = 0</li>
+<li><code>next[2]</code> (for <code>&quot;aba&quot;</code>) = 1 (因为 <code>&quot;a&quot;</code> 是 <code>&quot;aba&quot;</code> 最长相等的真前缀和真后缀)</li>
+<li><code>next[3]</code> (for <code>&quot;abab&quot;</code>) = 2 (因为 <code>&quot;ab&quot;</code> 是 <code>&quot;abab&quot;</code> 最长相等的真前缀和真后缀)</li>
+<li><code>next[4]</code> (for <code>&quot;ababa&quot;</code>) = 3 (因为 <code>&quot;aba&quot;</code> 是 <code>&quot;ababa&quot;</code> 最长相等的真前缀和真后缀)</li>
+</ul>
+</li>
+<li>所以 <code>next</code> 数组是 <code>[0, 0, 1, 2, 3]</code>。</li>
+<li><strong>区分：</strong> 我们也讨论了 KMP <code>next</code> 数组存在多种定义（如标准 LPS 数组与优化 <code>nextval</code>），但核心思想一致，且要求在构建和匹配阶段保持一致性。在 LeetCode 和大多数竞赛中，标准 LPS 数组是主流。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>get_next</code> 函数的核心逻辑：</strong></p>
+<ul>
+<li><strong>初始化：</strong> <code>next[0] = 0;</code> (长度为1的前缀没有公共前后缀)。<code>j = 0;</code> (<code>j</code> 初始代表长度为0的空前缀)。</li>
+<li><strong><code>for (int i = 1; i &lt; n; ++i)</code>：</strong> <code>i</code> 遍历模式串，<code>next[i]</code> 的值依赖于 <code>needle[0...i-1]</code> 的信息。</li>
+<li><strong><code>j</code> 的双重身份（长度与索引）：</strong>
+<ul>
+<li><code>j</code> 的值代表当前已找到的<strong>最长公共前后缀的长度</strong>。</li>
+<li><code>j</code> 的值也作为<strong>索引</strong>，指向模式串中，这个最长公共前后缀<strong>之后</strong>的那个字符 (<code>needle[j]</code>)，它是我们用来与 <code>needle[i]</code> 比较的字符。</li>
+</ul>
+</li>
+<li><strong><code>while (j &gt; 0 &amp;&amp; needle[i] != needle[j]) { j = next[j - 1]; }</code> (回溯 <code>j</code> - <strong>关键</strong>)：</strong>
+<ul>
+<li><strong>时机：</strong> 当 <code>needle[i]</code> (当前后缀字符) 与 <code>needle[j]</code> (当前前缀字符) 不匹配，且 <code>j</code> 大于 <code>0</code> (还有更短的公共前后缀可以回溯) 时。</li>
+<li><strong>作用：</strong> 将 <code>j</code> 回溯到 <code>next[j-1]</code> 的位置。<code>next[j-1]</code> 存储的是 <code>needle[0...j-1]</code> 这个前缀的<strong>次长公共前后缀的长度</strong>。这个 <code>while</code> 循环会持续回溯，直到 <code>j</code> 归零，或找到一个可以匹配 <code>needle[i]</code> 的 <code>needle[j]</code>。</li>
+<li><strong>意义：</strong> 这种回溯是有策略的，它利用了模式串自身的重复结构，避免了盲目回溯到 <code>0</code>。</li>
+</ul>
+</li>
+<li><strong><code>if (needle[i] == needle[j]) { j++; }</code> (匹配扩展)：</strong>
+<ul>
+<li><strong>时机：</strong> 当 <code>needle[i]</code> 和回溯后的 <code>needle[j]</code> 匹配时。</li>
+<li><strong>作用：</strong> <code>j++</code>，表示最长公共前后缀的长度增加了 1。这个新长度 <code>j</code> 将是 <code>next[i]</code> 的值。</li>
+</ul>
+</li>
+<li><strong><code>next[i] = j;</code>：</strong> 存储本轮计算出的 <code>j</code> 值。</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-kmp-匹配过程-strstr-函数">3. KMP 匹配过程 (<code>strStr</code> 函数)
+</h3><p>在构建完 <code>next</code> 数组后，KMP 匹配过程本身相对直观，也使用了类似的双指针和回溯逻辑。</p>
+<ol>
+<li><strong>初始化：</strong> <code>i = 0</code> (主串指针)，<code>j = 0</code> (模式串指针/已匹配长度)。</li>
+<li><strong>主循环：</strong> <code>for (int i = 0; i &lt; haystack.size(); i++)</code>。</li>
+<li><strong><code>while (j &gt; 0 &amp;&amp; haystack[i] != needle[j]) { j = next[j - 1]; }</code> (失配回溯)：</strong>
+<ul>
+<li><strong>时机：</strong> 当 <code>haystack[i]</code> (主串当前字符) 与 <code>needle[j]</code> (模式串当前字符) 不匹配，且 <code>j &gt; 0</code> 时。</li>
+<li><strong>作用：</strong> <code>j</code> 回溯到 <code>next[j-1]</code>。这意味着我们利用了 <code>needle[0...j-1]</code> 这段<strong>已匹配部分</strong>的最长公共前后缀，将模式串向前滑动，让 <code>needle[next[j-1]]</code> 对齐 <code>haystack[i]</code>，避免了 <code>i</code> 的回溯。</li>
+</ul>
+</li>
+<li><strong><code>if (haystack[i] == needle[j]) { j++; }</code> (匹配前进)：</strong>
+<ul>
+<li><strong>时机：</strong> 当 <code>haystack[i]</code> 和 <code>needle[j]</code> 匹配时。</li>
+<li><strong>作用：</strong> <code>j++</code>，表示模式串又成功匹配了一个字符。</li>
+</ul>
+</li>
+<li><strong>匹配成功条件：</strong> <code>if (j == needle.size()) { return i - needle.size() + 1; }</code>
+<ul>
+<li><strong>判断：</strong> 当 <code>j</code> 的值达到模式串的完整长度 (<code>needle.size()</code>) 时，表示整个模式串已经匹配成功。</li>
+<li><strong>返回：</strong> 匹配的起始索引是 <code>i - needle.size() + 1</code>。</li>
+</ul>
+</li>
+<li><strong>未找到：</strong> 循环结束后，如果 <code>j</code> 未达到 <code>needle.size()</code>，返回 <code>-1</code>。</li>
+<li><strong>空模式串：</strong> <code>if (needle.empty()) { return 0; }</code> (特殊处理，通常返回 0)。</li>
+</ol>
+<h3 id="4-kmp-的核心原理j">4. KMP 的核心原理：<strong><code>j</code> 维护的不变式</strong>
+</h3><p>KMP 算法的精妙之处在于 <code>j</code> 变量在 <code>get_next</code> 函数中维护的一个关键<strong>循环不变量</strong>。</p>
+<p><strong><code>j</code> 维护的不变式：</strong></p>
+<p>在 <code>get_next</code> 函数中，当 <code>for</code> 循环推进到 <code>i</code> 索引时，<code>j</code> 的值（在进入 <code>while</code> 循环并可能回溯之后，但在 <code>if</code> 匹配检查之前）始终代表着：</p>
+<p><code>needle[0...j-1]</code> (模式串的一个前缀) 已经和 <code>needle[i-j...i-1]</code> (模式串中以 <code>i-1</code> 结尾的一个后缀) 完全匹配。</p>
+<p>也就是说，此时 <code>j</code> 是模式串 <code>needle[0...i-1]</code> 这个前缀的最长公共前后缀的长度。</p>
+<p><strong>为什么 <code>needle[i] == needle[j]</code> 意味着可以扩充长度？</strong></p>
+<p>现在，我们来看当 <code>needle[i] == needle[j]</code> 发生时：</p>
+<p>我们知道：</p>
+<p><code>needle[0...j-1]</code> == <code>needle[i-j...i-1]</code> （这是 <code>j</code> 的定义所保证的，即它是一个公共前后缀）</p>
+<p><code>needle[j]</code> == <code>needle[i]</code> （这是当前的匹配条件）</p>
+<p>通过这两点，我们可以推导出：</p>
+<p><code>needle[0...j-1]</code> <strong>后面接上</strong> <code>needle[j]</code></p>
+<p>等价于</p>
+<p><code>needle[i-j...i-1]</code> <strong>后面接上</strong> <code>needle[i]</code></p>
+<p>也就是说：</p>
+<p><code>needle[0...j]</code> == <code>needle[i-j...i]</code></p>
+<p>这意味着什么？</p>
+<p><code>needle[0...j]</code> 是模式串 <code>needle[0...i]</code> 的一个真前缀。</p>
+<p><code>needle[i-j...i]</code> 是模式串 <code>needle[0...i]</code> 的一个真后缀。</p>
+<p>而且，这两个真前缀和真后缀是相等的，并且它们的长度是 <code>j+1</code>。</p>
+<p>既然 <code>j</code> 已经代表了 <code>needle[0...i-1]</code> 的最长公共前后缀的长度，并且我们现在能通过 <code>needle[i]</code> 和 <code>needle[j]</code> 的匹配将其扩展一位，那么 <code>j+1</code> 就必然是 <code>needle[0...i]</code> 的最长公共前后缀的长度。</p>
+<p>正是对这些循环不变量的维护，使得 KMP 算法能够以其独特的“模式串滑动”方式，在 $O(N+M)$ 的时间复杂度内完成字符串匹配，这比朴素算法的 $O(NM)$ 具有显著的性能优势。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 本题的难点是实现 KMP 算法, KMP的难点是求出模式串的next数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">get_next</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">needle</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">needle</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">next</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">needle</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">needle</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">needle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">needle</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">next</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">strStr</span><span class="p">(</span><span class="n">string</span> <span class="n">haystack</span><span class="p">,</span> <span class="n">string</span> <span class="n">needle</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">needle</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">next</span> <span class="o">=</span> <span class="n">get_next</span><span class="p">(</span><span class="n">needle</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">haystack</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">needle</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">haystack</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">needle</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">haystack</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 理解j的值, 还是从循环开始去对应
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 比如i=0时, 匹配成功j对应的是1, 即是匹配的子串长度, 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 所以这里的j即表示长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">needle</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 最后要返回在在haystack中的索引, 最初的索引
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="7_重复的子字符串_leetcode_459-非常重要">7_重复的子字符串_leetcode_459 非常重要
+</h2><p>这个问题要求我们判断一个非空字符串 <code>s</code> 是否能由它的一个<strong>子串重复多次</strong>拼接而成。解决这个问题的核心在于巧妙地运用 <strong>KMP 算法</strong>中计算出的 <code>next</code> 数组。</p>
+<h3 id="1-问题核心思路利用-next-数组的最后一位">1. 问题核心思路：利用 <code>next</code> 数组的最后一位
+</h3><ol>
+<li><strong>计算 <code>next</code> 数组：</strong> 我们首先需要为字符串 <code>s</code> 计算出其 <code>next</code> 数组。<code>next[i]</code> 表示 <code>s</code> 中以索引 <code>i</code> 结尾的前缀子串 <code>s[0...i]</code> 的最长相等真前缀和真后缀的长度。</li>
+<li><strong>关注 <code>next[n-1]</code>：</strong> 字符串 <code>s</code> 的长度是 <code>n</code>。<code>next[n-1]</code>（我们称之为 <code>L</code>）代表了整个字符串 <code>s</code> 的最长相等真前缀和真后缀的长度。</li>
+</ol>
+<h3 id="2-关键数学原理n---l-是最小重复单元的长度">2. 关键数学原理：<code>n - L</code> 是最小重复单元的长度
+</h3><p>这是理解问题的最核心部分，也是我们这次讨论的重点：</p>
+<ul>
+<li><strong><code>L</code> 的意义：</strong> 如果一个字符串 <code>s</code> 能由一个子串 <code>sub</code> 重复 <code>k</code> 次构成，那么 <code>s</code> 的最长相等真前缀（即 <code>(k-1)</code> 个 <code>sub</code> 的拼接）将与它的最长相等真后缀（同样是 <code>(k-1)</code> 个 <code>sub</code> 的拼接）相等。这个最长公共前后缀的长度 <code>L</code> 就等于 <code>n - len_sub</code>，其中 <code>len_sub</code> 是 <code>sub</code> 的长度。</li>
+<li><strong>推导 <code>n - L</code>：</strong> 通过 <code>n = k * len_sub</code> 和 <code>L = (k-1) * len_sub</code>，我们可以推导出 <code>n - L = len_sub</code>。</li>
+<li><strong>结论：</strong> 因此，<code>n - L</code> 精确地代表了构成字符串 <code>s</code> 的<strong>最小重复单元的长度</strong>。</li>
+</ul>
+<h3 id="3-完整的判断条件">3. 完整的判断条件
+</h3><p>要判断字符串 <code>s</code> 是否由重复子串构成，需要同时满足以下两个条件：</p>
+<ol>
+<li>
+<p><strong><code>L &gt; 0</code>：</strong></p>
+<ul>
+<li>这个条件确保字符串 <code>s</code> 必须拥有一个<strong>非空的公共前后缀</strong>。如果 <code>L=0</code>，意味着 <code>s</code> 不具备任何能构成重复模式的内部结构（例如 <code>abcde</code>）。</li>
+<li>此外，<code>L &gt; 0</code> 还保证了 <code>n - L &lt; n</code>，即最小重复单元的长度<strong>小于</strong>字符串的总长度。这就意味着 <code>s</code> 是由这个最小重复单元<strong>重复了多于一次</strong>（<code>k &gt; 1</code>）构成的。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>n % (n - L) == 0</code>：</strong></p>
+<ul>
+<li>这个条件确保字符串 <code>s</code> 的总长度 <code>n</code> 必须能被这个<strong>最小重复单元的长度 <code>(n - L)</code> 整除</strong>。</li>
+<li>如果能整除，就意味着 <code>s</code> 能够被这个 <code>(n - L)</code> 长度的子串<strong>完整、无缝地重复拼接</strong>而成。</li>
+</ul>
+</li>
+</ol>
+<p><strong>综合：<code>s.size() % (s.size() - next[s.size() - 1]) == 0 &amp;&amp; next[s.size() - 1] &gt; 0</code></strong></p>
+<h3 id="4-kmp-算法的核心机制复习">4. KMP 算法的核心机制复习
+</h3><ol>
+<li>
+<p><strong><code>next</code> 数组的计算 (<code>get_next</code> 函数)：</strong></p>
+<ul>
+<li><strong>目标：</strong> 计算 <code>next[i]</code>，即 <code>s[0...i]</code> 的最长相等真前缀和真后缀的长度。</li>
+<li><strong>核心逻辑：</strong> 使用两个指针 <code>i</code> 和 <code>j</code>。<code>i</code> 遍历模式串，<code>j</code> 表示当前已匹配的最长公共前后缀的长度。
+<ul>
+<li><strong>失配 (<code>needle[i] != needle[j]</code>)：</strong> 当 <code>needle[i]</code> 和 <code>needle[j]</code> 不匹配时，<code>j</code> 会根据 <code>next[j-1]</code> 的值进行<strong>回溯</strong>。这个 <code>while</code> 循环会持续进行，直到 <code>j</code> 归零或找到新的匹配点。</li>
+<li><strong>匹配 (<code>needle[i] == needle[j]</code>)：</strong> 当 <code>needle[i]</code> 和 <code>needle[j]</code> 匹配时，<code>j</code> 会简单地 <code>j++</code>，表示找到了一个更长的公共前后缀。</li>
+<li><strong>赋值：</strong> 最终计算出的 <code>j</code> 值（代表长度）赋给 <code>next[i]</code>。</li>
+</ul>
+</li>
+<li><strong><code>j</code> 的双重身份：</strong> <code>j</code> 的值既是当前最长公共前后缀的长度，也是模式串中该最长前缀之后一个字符的索引。</li>
+</ul>
+</li>
+<li>
+<p><strong>KMP 匹配中的 <code>next</code> 数组作用：</strong></p>
+<ul>
+<li>在主串 <code>haystack</code> 和模式串 <code>needle</code> 匹配过程中，当 <code>haystack[i]</code> 和 <code>needle[j]</code> 失配时，<code>j</code> 会回溯到 <code>next[j-1]</code>。</li>
+<li>这利用了 <code>needle[0...j-1]</code> 这段已匹配子串的内部结构，让模式串高效地“滑动”，从而避免了主串指针 <code>i</code> 的回溯，也避免了模式串从头开始的重复比较。</li>
+</ul>
+</li>
+</ol>
+<h3 id="5循环不变量与算法的优雅">5.循环不变量与算法的优雅
+</h3><ul>
+<li><strong><code>get_next</code> 函数中 <code>j</code> 的循环不变量：</strong> 在 <code>for</code> 循环的每次迭代开始时，<code>j</code> 的值始终代表 <code>needle[0...i-1]</code> 的最长公共前后缀的长度。<code>while</code> 循环的回溯和 <code>if</code> 语句中的 <code>j++</code> 操作都是为了<strong>维护</strong>这个不变式。</li>
+<li><strong><code>strStr</code> 函数中 <code>j</code> 的循环不变量：</strong> 在 <code>for</code> 循环的每次迭代开始时，<code>j</code> 的值表示 <code>needle[0...j-1]</code> 已经和 <code>haystack[i-j...i-1]</code> 成功匹配。</li>
+<li><strong>意义：</strong> 循环不变量是理解和设计复杂循环算法的强大工具，它提供了高层次的视角，证明算法正确性，并指导设计。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">repeatedSubstringPattern</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// s长度大于1, 所以不需要自己判断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">next</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 得到next数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">next</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 如果是由重复子串构成, next[n-1]即模式串的
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 真前缀和真后缀相等的最大长度 不为0, 且s的长度是next[n-1]的整数倍
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">next</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">%</span> <span class="n">next</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div>
 </section>
 
@@ -486,6 +908,32 @@
 
     </footer>
 
+
+    
+    <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
 
     
 </article>
