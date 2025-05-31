@@ -1,7 +1,7 @@
 +++
-date = '{{ .Date }}'
+date = '2025-05-31T10:11:32+08:00'
 draft = true
-title = '{{ replace .File.ContentBaseName "-" " " | title }}'
+title = '代码随想录_day14'
 image = "img/code.jpg"
 license = false
 math = true
