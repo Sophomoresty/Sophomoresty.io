@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n24_二叉搜索树的最小绝对差_leetcode_530 本题要求找出二叉搜索树 (BST) 中任意两个节点值之间的最小绝对差。\n1. 问题核心：BST 的有序性 解决这道题的关键在于利用 BST 的核心特性：\nBST 的中序遍历结果是一个严格递增的有序序列。 在有序序列中，最小的差值必然发生在相邻元素之间。 因此，我们的任务就变成了：对 BST 进行中序遍历，并在遍历过程中比较相邻节点的值，找出最小差值。\n">
+<title>代码随想录_day18</title>
+
+<link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day18/'>
+
+<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="代码随想录_day18">
+<meta property='og:description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n24_二叉搜索树的最小绝对差_leetcode_530 本题要求找出二叉搜索树 (BST) 中任意两个节点值之间的最小绝对差。\n1. 问题核心：BST 的有序性 解决这道题的关键在于利用 BST 的核心特性：\nBST 的中序遍历结果是一个严格递增的有序序列。 在有序序列中，最小的差值必然发生在相邻元素之间。 因此，我们的任务就变成了：对 BST 进行中序遍历，并在遍历过程中比较相邻节点的值，找出最小差值。\n">
+<meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day18/'>
+<meta property='og:site_name' content='靝Sol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-06-05T14:38:36&#43;08:00'/><meta property='article:modified_time' content='2025-06-05T14:38:36&#43;08:00'/><meta property='og:image' content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
+<meta name="twitter:title" content="代码随想录_day18">
+<meta name="twitter:description" content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n24_二叉搜索树的最小绝对差_leetcode_530 本题要求找出二叉搜索树 (BST) 中任意两个节点值之间的最小绝对差。\n1. 问题核心：BST 的有序性 解决这道题的关键在于利用 BST 的核心特性：\nBST 的中序遍历结果是一个严格递增的有序序列。 在有序序列中，最小的差值必然发生在相邻元素之间。 因此，我们的任务就变成了：对 BST 进行中序遍历，并在遍历过程中比较相邻节点的值，找出最小差值。\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
+    <link rel="shortcut icon" href="/lucy.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/Sophomoresty.io/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/Sophomoresty.io/img/lucy_hu_80d75fc8bcdaf374.png" width="300"
+                            height="273" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/Sophomoresty.io">靝Sol</a></h1>
+            <h2 class="site-description">Be What You Wanna Be</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://www.bilibili.com/'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1747382077492" class="icon" viewBox="0 0 1129 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1470" xmlns:xlink="http://www.w3.org/1999/xlink" width="220.5078125" height="200"><path d="M234.909 9.656a80.468 80.468 0 0 1 68.398 0 167.374 167.374 0 0 1 41.843 30.578l160.937 140.82h115.07l160.936-140.82a168.983 168.983 0 0 1 41.843-30.578A80.468 80.468 0 0 1 930.96 76.445a80.468 80.468 0 0 1-17.703 53.914 449.818 449.818 0 0 1-35.406 32.187 232.553 232.553 0 0 1-22.531 18.508h100.585a170.593 170.593 0 0 1 118.289 53.109 171.397 171.397 0 0 1 53.914 118.288v462.693a325.897 325.897 0 0 1-4.024 70.007 178.64 178.64 0 0 1-80.468 112.656 173.007 173.007 0 0 1-92.539 25.75h-738.7a341.186 341.186 0 0 1-72.421-4.024A177.835 177.835 0 0 1 28.91 939.065a172.202 172.202 0 0 1-27.36-92.539V388.662a360.498 360.498 0 0 1 0-66.789A177.03 177.03 0 0 1 162.487 178.64h105.414c-16.899-12.07-31.383-26.555-46.672-39.43a80.468 80.468 0 0 1-25.75-65.984 80.468 80.468 0 0 1 39.43-63.57M216.4 321.873a80.468 80.468 0 0 0-63.57 57.937 108.632 108.632 0 0 0 0 30.578v380.615a80.468 80.468 0 0 0 55.523 80.469 106.218 106.218 0 0 0 34.601 5.632h654.208a80.468 80.468 0 0 0 76.444-47.476 112.656 112.656 0 0 0 8.047-53.109v-354.06a135.187 135.187 0 0 0 0-38.625 80.468 80.468 0 0 0-52.304-54.719 129.554 129.554 0 0 0-49.89-7.242H254.22a268.764 268.764 0 0 0-37.82 0z m0 0" fill="#20B0E3" p-id="1471"></path><path d="M348.369 447.404a80.468 80.468 0 0 1 55.523 18.507 80.468 80.468 0 0 1 28.164 59.547v80.468a80.468 80.468 0 0 1-16.094 51.5 80.468 80.468 0 0 1-131.968-9.656 104.609 104.609 0 0 1-10.46-54.719v-80.468a80.468 80.468 0 0 1 70.007-67.593z m416.02 0a80.468 80.468 0 0 1 86.102 75.64v80.468a94.148 94.148 0 0 1-12.07 53.11 80.468 80.468 0 0 1-132.773 0 95.757 95.757 0 0 1-12.875-57.133V519.02a80.468 80.468 0 0 1 70.007-70.812z m0 0" fill="#20B0E3" p-id="1472"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Sophomoresty'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1747382114895" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2439" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M0 556.416C0 602.816 4.352 644.8 13.024 682.336 21.696 719.904 33.728 752.544 49.088 780.224 64.416 807.936 83.968 832.32 107.648 853.344 131.36 874.368 157.056 891.552 184.768 904.928 212.48 918.272 244.096 929.12 279.648 937.472 315.2 945.824 351.52 951.648 388.576 955.008 425.632 958.336 466.336 960 510.752 960 555.488 960 596.384 958.336 633.44 955.008 670.496 951.648 706.88 945.824 742.592 937.472 778.304 929.12 810.112 918.272 837.984 904.928 865.856 891.552 891.712 874.368 915.584 853.344 939.456 832.32 959.168 807.936 974.688 780.224 990.208 752.544 1002.304 719.904 1010.976 682.336 1019.648 644.8 1024 602.816 1024 556.416 1024 473.632 996.288 402.016 940.896 341.6 943.872 333.568 946.624 324.48 949.152 314.304 951.648 304.128 953.984 289.6 956.16 270.752 958.336 251.872 957.504 230.112 953.664 205.408 949.824 180.704 942.72 155.488 932.352 129.792L924.864 128.288C919.52 127.296 910.752 127.52 898.56 129.024 886.368 130.528 872.192 133.536 856 138.048 839.808 142.56 818.944 151.232 793.408 164.096 767.872 176.928 740.928 193.056 712.544 212.416 663.808 199.04 596.864 192.384 511.744 192.384 426.944 192.384 360.192 199.04 311.456 212.416 283.072 193.056 255.968 176.928 230.08 164.096 204.224 151.232 183.616 142.56 168.256 138.048 152.896 133.536 138.528 130.624 125.184 129.28 111.84 127.936 103.392 127.52 99.904 128.032 96.384 128.544 93.632 129.12 91.648 129.792 81.28 155.488 74.176 180.672 70.368 205.408 66.528 230.112 65.696 251.872 67.84 270.752 70.016 289.6 72.352 304.128 74.848 314.304 77.376 324.48 80.128 333.568 83.136 341.6 27.712 402.016 0 473.632 0 556.416ZM125.696 682.08C125.696 634.016 147.552 589.952 191.296 549.888 204.288 537.888 219.488 528.8 236.832 522.592 254.208 516.448 273.824 512.928 295.68 512.096 317.536 511.264 338.496 511.424 358.528 512.608 378.56 513.76 403.264 515.36 432.64 517.344 462.016 519.36 487.392 520.352 508.736 520.352 530.112 520.352 555.488 519.36 584.864 517.344 614.24 515.36 638.944 513.76 658.976 512.608 679.008 511.424 699.936 511.264 721.792 512.096 743.68 512.928 763.296 516.448 780.64 522.592 798.016 528.768 813.184 537.888 826.208 549.888 869.952 589.28 891.808 633.344 891.808 682.08 891.808 710.816 888.224 736.256 881.024 758.464 873.856 780.672 864.672 799.264 853.504 814.304 842.304 829.312 826.784 842.08 806.944 852.608 787.072 863.104 767.712 871.2 748.832 876.896 729.984 882.56 705.792 886.976 676.224 890.144 646.688 893.312 620.32 895.232 597.12 895.904 573.92 896.576 544.448 896.928 508.736 896.928 473.024 896.928 443.552 896.576 420.352 895.904 397.152 895.232 370.784 893.312 341.248 890.144 311.712 886.976 287.52 882.56 268.64 876.896 249.792 871.2 230.432 863.104 210.56 852.608 190.688 842.08 175.168 829.312 164 814.304 152.8 799.264 143.616 780.672 136.448 758.464 129.28 736.256 125.696 710.816 125.696 682.08ZM640 672A2 3 2520 1 0 768 672 2 3 2520 1 0 640 672zM256 672A2 3 2520 1 0 384 672 2 3 2520 1 0 256 672z" fill="#000000" p-id="2440"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/Sophomoresty.io/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Sophomoresty.io/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Sophomoresty.io/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>档案</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Sophomoresty.io/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜素</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Sophomoresty.io/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#24_二叉搜索树的最小绝对差_leetcode_530">24_二叉搜索树的最小绝对差_leetcode_530</a>
+      <ol>
+        <li><a href="#1-问题核心bst-的有序性">1. 问题核心：BST 的有序性</a></li>
+        <li><a href="#2-解法递归中序遍历--辅助变量">2. 解法：递归中序遍历 + 辅助变量</a>
+          <ol>
+            <li><a href="#核心思路">核心思路</a></li>
+            <li><a href="#实现细节与重要考点">实现细节与重要考点</a></li>
+            <li><a href="#最终代码逻辑">最终代码逻辑</a></li>
+          </ol>
+        </li>
+        <li><a href="#4-复杂度">4. 复杂度</a></li>
+      </ol>
+    </li>
+    <li><a href="#25_二叉搜索树中的众数_leetcode_501">25_二叉搜索树中的众数_leetcode_501</a>
+      <ol>
+        <li><a href="#1-问题描述与挑战">1. 问题描述与挑战</a></li>
+        <li><a href="#2-问题核心bst-中序遍历的有序性">2. 问题核心：BST 中序遍历的有序性</a></li>
+        <li><a href="#3-解法一次中序遍历--精妙的状态管理-最优解">3. 解法：一次中序遍历 + 精妙的状态管理 (最优解)</a>
+          <ol>
+            <li><a href="#核心思路-1">核心思路</a></li>
+            <li><a href="#实现细节与重要考点-1">实现细节与重要考点</a></li>
+            <li><a href="#最终代码逻辑-1">最终代码逻辑</a></li>
+          </ol>
+        </li>
+        <li><a href="#5-复杂度">5. 复杂度</a></li>
+      </ol>
+    </li>
+    <li><a href="#26_二叉树的最近公共祖先_leetcode_236">26_二叉树的最近公共祖先_leetcode_236</a>
+      <ol>
+        <li><a href="#1-问题描述与挑战-1">1. 问题描述与挑战</a></li>
+        <li><a href="#2-递归设计方法论在-lca-中的应用">2. 递归设计方法论在 LCA 中的应用</a>
+          <ol>
+            <li><a href="#21-核心思想函数就是黑箱--相信与承诺">2.1 核心思想：函数就是黑箱 — 相信与承诺</a></li>
+            <li><a href="#22-基本情况-base-case--递归的终点">2.2 基本情况 (Base Case) — 递归的终点</a></li>
+            <li><a href="#23-递归关系-recursive-relation--分解与组合">2.3 递归关系 (Recursive Relation) — 分解与组合</a></li>
+            <li><a href="#24-信息流向自底向上汇报结果">2.4 信息流向：自底向上汇报结果</a></li>
+          </ol>
+        </li>
+        <li><a href="#3-最终代码逻辑">3. 最终代码逻辑</a></li>
+        <li><a href="#4-复杂度分析">4. 复杂度分析</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day18/">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" alt="Featured image of post 代码随想录_day18" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" >
+                代码随想录
+            </a>
+        
+            <a href="/Sophomoresty.io/categories/c&#43;&#43;/" >
+                C&#43;&#43;
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day18/">代码随想录_day18</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 05, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 11 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>代码仓库: <a class="link" href="https://github.com/Sophomoresty/Algorithm_Exercises.git"  target="_blank" rel="noopener"
+    >https://github.com/Sophomoresty/Algorithm_Exercises.git</a></p>
+<h2 id="24_二叉搜索树的最小绝对差_leetcode_530">24_二叉搜索树的最小绝对差_leetcode_530
+</h2><p>本题要求找出二叉搜索树 (BST) 中任意两个节点值之间的<strong>最小绝对差</strong>。</p>
+<h3 id="1-问题核心bst-的有序性">1. 问题核心：BST 的有序性
+</h3><p>解决这道题的关键在于利用 <strong>BST 的核心特性</strong>：</p>
+<ul>
+<li>BST 的<strong>中序遍历</strong>结果是一个<strong>严格递增</strong>的有序序列。</li>
+<li>在有序序列中，最小的差值必然发生在<strong>相邻元素</strong>之间。</li>
+</ul>
+<p>因此，我们的任务就变成了：对 BST 进行中序遍历，并在遍历过程中比较相邻节点的值，找出最小差值。</p>
+<h3 id="2-解法递归中序遍历--辅助变量">2. 解法：递归中序遍历 + 辅助变量
+</h3><p>最经典且高效的方法是采用<strong>递归中序遍历</strong>。为了在递归调用中“记住”前一个访问的节点，我们需要一个辅助变量。</p>
+<h4 id="核心思路">核心思路
+</h4><p>执行标准的<strong>中序遍历</strong>（左子树 -&gt; 根节点 -&gt; 右子树）。当访问到每个节点（“根”部分）时，将其值与<strong>前一个</strong>已经访问过的节点的值进行比较，并更新最小差值。</p>
+<h4 id="实现细节与重要考点">实现细节与重要考点
+</h4><ol>
+<li><strong>辅助变量</strong>：
+<ul>
+<li>使用类成员变量 <code>TreeNode* pre</code> 来存储中序遍历中当前节点的<strong>前一个节点</strong>的指针。</li>
+<li>使用类成员变量 <code>int res_min</code> 来存储迄今为止找到的<strong>最小绝对差</strong>，并初始化为 <code>INT_MAX</code>。</li>
+</ul>
+</li>
+<li><strong>函数设计</strong>：
+<ul>
+<li>通常会有一个 <code>void</code> 类型的辅助递归函数（例如 <code>getMinimumDifference_help</code>），它负责执行中序遍历并更新 <code>pre</code> 和 <code>res_min</code> 这两个成员变量。</li>
+<li>公共接口函数 <code>getMinimumDifference(TreeNode* root)</code> 则负责初始化 <code>pre</code> 和 <code>res_min</code>，调用辅助函数，并最终返回 <code>res_min</code>。</li>
+</ul>
+</li>
+<li><strong>重置关键</strong>：
+<ul>
+<li><strong>最重要的一点</strong>：由于 <code>pre</code> 和 <code>res_min</code> 是类成员变量，它们会<strong>保留上一个测试用例的状态</strong>。因此，在公共接口函数 <code>getMinimumDifference</code> 的开头，<strong>必须显式地将 <code>pre</code> 重置为 <code>nullptr</code>，将 <code>res_min</code> 重置为 <code>INT_MAX</code></strong>。这是确保每次函数调用独立且结果正确的核心。</li>
+</ul>
+</li>
+<li><strong>计算与更新</strong>：
+<ul>
+<li>在 <code>getMinimumDifference_help</code> 函数中，当中序遍历访问到当前节点 <code>root</code> 时：
+<ul>
+<li>首先<strong>递归处理左子树</strong>。</li>
+<li>然后，检查 <code>pre</code> 是否为 <code>nullptr</code>。如果 <code>pre</code> 不为空（说明 <code>root</code> 不是中序遍历的第一个节点），就计算 <code>std::abs(pre-&gt;val - root-&gt;val)</code>。</li>
+<li>使用 <code>std::min(res_min, current_diff)</code> 或一个 <code>if</code> 语句来<strong>更新 <code>res_min</code></strong>。</li>
+<li>最后，将 <code>pre</code> 更新为当前节点 <code>root</code>，为处理下一个节点做准备。</li>
+<li>接着<strong>递归处理右子树</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="最终代码逻辑">最终代码逻辑
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"> </span><span class="c1">// For std::min
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;climits&gt;</span><span class="cp">   </span><span class="c1">// For INT_MAX
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp">     </span><span class="c1">// For std::abs
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// TreeNode 结构体定义 (此处省略，假设已提供)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">res_min_member</span><span class="p">;</span>   <span class="c1">// 类成员变量，用于保存最小绝对差
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">pre_member</span><span class="p">;</span> <span class="c1">// 类成员变量，用于保存中序遍历的前一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 辅助递归函数：执行中序遍历并计算最小绝对差
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">getMinimumDifference_help</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span> <span class="c1">// 终止条件：空节点，停止递归
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 1. 递归左子树 (中序遍历的 &#34;左&#34; 部分)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">getMinimumDifference_help</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2. 处理当前节点 (中序遍历的 &#34;根&#34; 部分)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">pre_member</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 只有当 pre_member 不为空时，才能计算差值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kt">int</span> <span class="n">current_diff</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">pre_member</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">-</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res_min_member</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">res_min_member</span><span class="p">,</span> <span class="n">current_diff</span><span class="p">);</span> <span class="c1">// 更新最小差值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pre_member</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span> <span class="c1">// 更新前一个节点为当前节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3. 递归右子树 (中序遍历的 &#34;右&#34; 部分)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">getMinimumDifference_help</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 主入口函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">getMinimumDifference</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 每次调用公共接口时，重置成员变量，确保计算独立性
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">res_min_member</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">pre_member</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>     
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">getMinimumDifference_help</span><span class="p">(</span><span class="n">root</span><span class="p">);</span> <span class="c1">// 调用辅助递归函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res_min_member</span><span class="p">;</span> <span class="c1">// 返回最终结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4-复杂度">4. 复杂度
+</h3><ul>
+<li><strong>时间复杂度</strong>：$O(N)$。每个节点被访问一次。</li>
+<li><strong>空间复杂度</strong>：$O(H)$，其中 $H$ 是树的高度。主要来自递归栈的深度。最坏情况下 (倾斜树) $O(N)$。</li>
+</ul>
+<h2 id="25_二叉搜索树中的众数_leetcode_501">25_二叉搜索树中的众数_leetcode_501
+</h2><h3 id="1-问题描述与挑战">1. 问题描述与挑战
+</h3><p>本题要求找出二叉搜索树 (BST) 中出现频率最高的元素（即<strong>众数</strong>）。BST 中的元素值可能存在重复。</p>
+<p><strong>挑战</strong>：如何高效地统计频率，并找出众数，同时尽量优化空间复杂度。</p>
+<h3 id="2-问题核心bst-中序遍历的有序性">2. 问题核心：BST 中序遍历的有序性
+</h3><p>解决这道题的关键在于利用 <strong>BST 的中序遍历特性</strong>：</p>
+<ul>
+<li>BST 的中序遍历结果是一个<strong>有序序列</strong>。</li>
+<li>在有序序列中，<strong>相同的元素值必然是连续出现的</strong>。</li>
+</ul>
+<p>这个特性使得我们无需使用额外的哈希表（<code>unordered_map</code>）来统计所有频率，从而实现 $O(1)$ 的额外空间复杂度（不计算递归栈空间和结果存储空间）。</p>
+<h3 id="3-解法一次中序遍历--精妙的状态管理-最优解">3. 解法：一次中序遍历 + 精妙的状态管理 (最优解)
+</h3><p>这是本题最推荐且最具挑战性的解法，它在一次中序遍历中完成频率统计和众数收集。</p>
+<h4 id="核心思路-1">核心思路
+</h4><p>执行标准的<strong>中序遍历</strong>（左子树 -&gt; 根节点 -&gt; 右子树）。在遍历过程中，维护三个状态变量：</p>
+<ol>
+<li><code>pre</code>：指向中序遍历中当前节点<strong>前一个</strong>访问过的节点。</li>
+<li><code>count</code>：记录当前节点值<strong>连续出现</strong>的次数。</li>
+<li><code>max_count</code>：记录迄今为止遇到的<strong>最大频率</strong>。</li>
+</ol>
+<h4 id="实现细节与重要考点-1">实现细节与重要考点
+</h4><ol>
+<li>
+<p><strong>状态变量</strong>：</p>
+<ul>
+<li><code>TreeNode *pre;</code>：保存前一个访问的节点，用于比较当前节点值。</li>
+<li><code>int count;</code>：记录当前数字的连续出现次数。</li>
+<li><code>int max_count;</code>：记录历史最高频率。</li>
+<li><code>std::vector&lt;int&gt; res_vec;</code>：存储最终的众数结果（因为可能不止一个众数）。</li>
+</ul>
+</li>
+<li>
+<p><strong>函数设计</strong>：</p>
+<ul>
+<li><code>void inorder_traversal(TreeNode *root)</code>：一个 <code>void</code> 类型的辅助递归函数，负责执行中序遍历并动态更新上述状态变量。</li>
+<li><code>std::vector&lt;int&gt; findMode(TreeNode *root)</code>：公共接口函数，负责初始化所有成员变量，调用辅助函数，并最终返回 <code>res_vec</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong>状态更新逻辑 (中序遍历核心)</strong>：</p>
+<ul>
+<li>当遍历到当前节点 <code>root</code> 时：
+<ul>
+<li><strong>更新 <code>count</code></strong>：
+<ul>
+<li>如果 <code>pre</code> 为空（即 <code>root</code> 是中序遍历的第一个节点），<code>count = 1</code>。</li>
+<li>如果 <code>root-&gt;val == pre-&gt;val</code>，<code>count++</code>。</li>
+<li>如果 <code>root-&gt;val != pre-&gt;val</code>，<code>count = 1</code>（重置计数）。</li>
+</ul>
+</li>
+<li><strong>更新 <code>max_count</code> 和 <code>res_vec</code></strong>：
+<ul>
+<li>如果 <code>count == max_count</code>：说明当前值也是众数，将其加入 <code>res_vec</code>。</li>
+<li>如果 <code>count &gt; max_count</code>：发现新的最高频率，更新 <code>max_count</code>，<strong>清空 <code>res_vec</code></strong>，然后将当前值加入 <code>res_vec</code>。</li>
+<li>如果 <code>count &lt; max_count</code>：不做任何操作。</li>
+</ul>
+</li>
+<li><strong>更新 <code>pre</code></strong>：<code>pre = root;</code> 为下一次比较做准备。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>成员变量重置</strong>：</p>
+<ul>
+<li><strong>最重要的一点</strong>：由于 <code>pre</code>、<code>count</code>、<code>max_count</code> 和 <code>res_vec</code> 是类成员变量，它们会保留上一个测试用例的状态。因此，在公共接口函数 <code>findMode</code> 的开头，<strong>必须显式地重置它们</strong>（<code>pre = nullptr; count = 0; max_count = 0; res_vec.clear();</code>），以确保每次函数调用独立且结果正确。</li>
+</ul>
+</li>
+</ol>
+<h4 id="最终代码逻辑-1">最终代码逻辑
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp"># include &lt;climits&gt; </span><span class="c1">// 包含 INT_MIN (用于 max_count 的初始化)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp"># include &lt;vector&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// TreeNode 结构体定义 (通常 LeetCode 环境会提供)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">()</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span><span class="n">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">pre</span><span class="p">;</span> <span class="c1">// 指向前一个遍历到的节点 (中序遍历顺序)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>     <span class="c1">// 当前节点值连续出现的次数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">max_count</span><span class="p">;</span> <span class="c1">// 遍历过程中遇到的最大频率
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res_vec</span><span class="p">;</span> <span class="c1">// 存储最终的众数 (可能不止一个)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 辅助函数：执行中序遍历并动态更新频率和众数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 返回值：void (通过成员变量修改外部状态)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="n">inorder_traversal</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 1. 终止条件 / 基本情况
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2. 递归左子树 (中序遍历的 &#34;左&#34; 部分)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">inorder_traversal</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3. 处理当前节点 (中序遍历的 &#34;根&#34; 部分) - 核心逻辑
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 步骤 A: 更新当前节点值的连续出现次数 (count)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">pre</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 如果 pre 为空，说明当前是中序遍历的第一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">pre</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 如果当前节点值与前一个节点值相同
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">count</span><span class="o">++</span><span class="p">;</span>                        <span class="c1">// 连续计数递增
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>       <span class="c1">// 如果当前节点值与前一个节点值不同
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 重置连续计数为 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pre</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span> <span class="c1">// 更新 pre 指针为当前节点 (为下一个节点的比较做准备)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 步骤 B: 根据 count 更新 max_count 和 res_vec (收集众数)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">max_count</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果当前连续计数等于已知的最大频率，说明找到了一个等频率的众数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">res_vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;</span> <span class="n">max_count</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果当前连续计数大于已知的最大频率，说明找到了新的最大频率
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">max_count</span> <span class="o">=</span> <span class="n">count</span><span class="p">;</span> <span class="c1">// 更新最大频率
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">res_vec</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span> <span class="c1">// 清空之前存储的众数 (因为它们频率不够了)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">res_vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span> <span class="c1">// 将当前节点值作为新的众数加入
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// else if (count &lt; max_count): 这种情况不需要任何操作，因为当前频率不够高
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 4. 递归右子树 (中序遍历的 &#34;右&#34; 部分)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">inorder_traversal</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 主入口函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">findMode</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// **关键修正**：每次调用公共接口时，重置成员变量，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 避免多个测试用例之间互相影响，确保每次计算都是独立的。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">pre</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// 重置 pre 指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">count</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">0</span><span class="p">;</span> <span class="c1">// 重置连续计数 (实际在第一个节点会被设为1，这里设0或任意值都可以)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">max_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 重置最大频率 (初始为0，确保任何正频率都能成为最大)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">res_vec</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span> <span class="c1">// 清空结果数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 调用辅助递归函数开始遍历和计算
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">inorder_traversal</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 返回最终收集到的众数列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">res_vec</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="5-复杂度">5. 复杂度
+</h3><ul>
+<li><strong>时间复杂度</strong>：$O(N)$。中序遍历会访问树中的每个节点一次。</li>
+<li><strong>空间复杂度</strong>：$O(H)$ (递归栈的深度，最坏 $O(N)$) + $O(K)$ (结果数组 <code>res_vec</code>，K 为众数个数，最坏 $O(N)$)。<strong>额外空间复杂度为 $O(1)$</strong> (不计算递归栈和结果存储空间)。</li>
+</ul>
+<h2 id="26_二叉树的最近公共祖先_leetcode_236">26_二叉树的最近公共祖先_leetcode_236
+</h2><h3 id="1-问题描述与挑战-1">1. 问题描述与挑战
+</h3><p>给定一个二叉树的根节点 <code>root</code>，以及树中的两个不同节点 <code>p</code> 和 <code>q</code>，找出它们的<strong>最近公共祖先 (LCA)</strong>。最近公共祖先的定义是：“对于有根树 <code>T</code> 的两个节点 <code>p</code>、<code>q</code>，最近公共祖先 <code>LCA(T, p, q)</code> 是指一个最低的节点 <code>z</code>，使得 <code>z</code> 既是 <code>p</code> 的祖先，又是 <code>q</code> 的祖先（我们允许一个节点是它自己的祖先）。”</p>
+<p><strong>挑战</strong>：LCA 问题的递归模式与传统二叉树遍历（前、中、后、层序）或简单递归（如计算高度、路径和）不同，它需要<strong>更复杂的自底向上信息汇报和分叉点识别</strong>。</p>
+<h3 id="2-递归设计方法论在-lca-中的应用">2. 递归设计方法论在 LCA 中的应用
+</h3><p>LCA 问题是理解<strong>递归函数“承诺”模型</strong>和<strong>自底向上信息回溯</strong>的经典案例。</p>
+<h4 id="21-核心思想函数就是黑箱--相信与承诺">2.1 核心思想：函数就是黑箱 — 相信与承诺
+</h4><p>所有递归设计的起点。我们将 <code>TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)</code> 这个函数视为一个能完成特定任务的“黑箱”。</p>
+<ul>
+<li><strong>函数签名</strong>：<code>TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)</code></li>
+<li><strong>函数承诺 (核心！)</strong>：当这个函数被调用在<strong>某个子树的根节点 <code>root</code> 上时，它承诺会返回：</strong>
+<ol>
+<li>如果 <code>p</code> 和 <code>q</code> <strong>都存在于</strong> 以 <code>root</code> 为根的这棵子树中：
+<ul>
+<li>返回它们的<strong>最近公共祖先 (LCA) 节点</strong>。</li>
+</ul>
+</li>
+<li>如果 <code>p</code> 和 <code>q</code> <strong>只有一个存在于</strong> 以 <code>root</code> 为根的这棵子树中：
+<ul>
+<li>返回<strong>那个存在的节点</strong> (<code>p</code> 或 <code>q</code>)。</li>
+</ul>
+</li>
+<li>如果 <code>p</code> 和 <code>q</code> <strong>都不存在于</strong> 以 <code>root</code> 为根的这棵子树中：
+<ul>
+<li>返回 <code>nullptr</code>。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="22-基本情况-base-case--递归的终点">2.2 基本情况 (Base Case) — 递归的终点
+</h4><ul>
+<li><strong><code>root == nullptr</code></strong>：空节点无法包含 <code>p</code> 或 <code>q</code>。
+<ul>
+<li><strong>返回</strong>：<code>nullptr</code> (兑现承诺：什么都没找到)。</li>
+</ul>
+</li>
+<li><strong><code>root == p || root == q</code></strong>：当前节点就是 <code>p</code> 或 <code>q</code> 中的一个。
+<ul>
+<li><strong>返回</strong>：<code>root</code> (兑现承诺：我找到了其中一个目标节点，就返回我。如果另一个目标节点在我的子树里，那我就是 LCA；否则，我就是那个唯一找到的节点)。</li>
+</ul>
+</li>
+</ul>
+<h4 id="23-递归关系-recursive-relation--分解与组合">2.3 递归关系 (Recursive Relation) — 分解与组合
+</h4><p>这是“相信”的力量。假设子问题 (<code>root-&gt;left</code> 和 <code>root-&gt;right</code>) 的 <code>lowestCommonAncestor</code> 调用已经兑现了它们的“承诺”，返回了正确结果 (<code>left_res</code> 和 <code>right_res</code>)。现在，<code>root</code> 需要根据这些“汇报”，决定自己向上一层汇报什么。</p>
+<ul>
+<li>
+<p><strong>场景 1：<code>left_res</code> 和 <code>right_res</code> 都非空</strong> (<code>left_res != nullptr &amp;&amp; right_res != nullptr</code>)</p>
+<ul>
+<li><strong>含义</strong>：左子树汇报找到了一个目标（或其 LCA），右子树也汇报找到了另一个目标（或其 LCA）。这说明 <code>p</code> 和 <code>q</code> 分别位于 <code>root</code> 的左右子树中。</li>
+<li><strong>结论</strong>：当前 <code>root</code> 就是 <code>p</code> 和 <code>q</code> 的 LCA。</li>
+<li><strong>返回</strong>：<code>root</code> (兑现承诺：返回 LCA)。</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 2：<code>left_res</code> 为空，<code>right_res</code> 非空</strong> (<code>left_res == nullptr &amp;&amp; right_res != nullptr</code>)</p>
+<ul>
+<li><strong>含义</strong>：左子树什么都没找到，所有目标节点（<code>p</code> 和 <code>q</code>，或其中一个）都存在于 <code>root</code> 的右子树中。</li>
+<li><strong>结论</strong>：LCA 必然在右子树中，或者 <code>right_res</code> 本身就是 <code>p</code> 或 <code>q</code>。</li>
+<li><strong>返回</strong>：<code>right_res</code> (兑现承诺：返回那个存在的目标节点或子树中的 LCA)。</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 3：<code>left_res</code> 非空，<code>right_res</code> 为空</strong> (<code>left_res != nullptr &amp;&amp; right_res == nullptr</code>)</p>
+<ul>
+<li><strong>含义</strong>：右子树什么都没找到，所有目标节点（<code>p</code> 和 <code>q</code>，或其中一个）都存在于 <code>root</code> 的左子树中。</li>
+<li><strong>结论</strong>：LCA 必然在左子树中，或者 <code>left_res</code> 本身就是 <code>p</code> 或 <code>q</code>。</li>
+<li><strong>返回</strong>：<code>left_res</code> (兑现承诺：返回那个存在的目标节点或子树中的 LCA)。</li>
+</ul>
+</li>
+<li>
+<p><strong>场景 4：<code>left_res</code> 和 <code>right_res</code> 都为空</strong> (<code>left_res == nullptr &amp;&amp; right_res == nullptr</code>)</p>
+<ul>
+<li><strong>含义</strong>：左右子树都什么都没找到。</li>
+<li><strong>结论</strong>：<code>p</code> 和 <code>q</code> 都不存在于以 <code>root</code> 为根的这棵子树中。</li>
+<li><strong>返回</strong>：<code>nullptr</code> (兑现承诺：什么都没找到)。</li>
+</ul>
+</li>
+</ul>
+<h4 id="24-信息流向自底向上汇报结果">2.4 信息流向：自底向上汇报结果
+</h4><p>LCA 的递归本质是<strong>自底向上</strong>的信息传递。<code>p</code> 和 <code>q</code> 就像在树中发出信号的灯塔。这些信号沿着调用栈一层层向上回溯，直到：</p>
+<ul>
+<li><strong>信号汇聚点</strong>：第一个同时收到来自左右子树信号的祖先节点，它就“捕获”了这两个信号，并识别出自己就是 LCA。</li>
+<li><strong>信号传递者</strong>：如果一个节点只收到一个信号，它就继续把这个信号往上传。</li>
+</ul>
+<h3 id="3-最终代码逻辑">3. 最终代码逻辑
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1.明确签名与承诺:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 参数是当前树的节点, p,q两个目标节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 承诺, 我感觉要回答承诺, 在一开始我很难直接给出, 我需要写出整体的函数框架, 才能给出承诺
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 这里的承诺不是单一的, 思考也不能从根节点出发, 首先我们是自底向上的, 所以要代入基础情况和中间节点思考, 最后再到根节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 从基础情况来看, root是空节点直接返回空节点; root是p或则q, 返回root, 表明我们找到了p或则q
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 后续就是遵循自底向上, 也就是后序遍历, 我们拿到左右子树返回的结果, 噢, 不对由于后续的内容我还没思考, 我也不知道它返回什么结果.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 所以承诺必须得一开始思考出来, 在这里写的时候把函数当成黑箱, 用承诺去理解.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 所以承诺是:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 1) 如果有p或则q, 我返回给你
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 2) 如果有p和q的最近的公共祖先, 我返回给你
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 3) 如果没有p和q, 我返回给你空
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 2.基本情况
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 1) root是空节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 2) root是p或则q
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 3.假设子问题已经解决, 我现在需要综合左右子树返回的信息, 继续向上传递
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 如果左右均不为空, 意味着root是最近的公共祖先
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 如果左右其中一个为空, 我继续向上传递不为空
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 如果左右均为空, 我传递为空
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 4.信息流向, 自下而上汇报结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 5.剪枝/优化, 优化不了, 我需要逐一从下往上汇报给根节点, 不能提前停止
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2.基本情况
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="n">p</span> <span class="o">||</span> <span class="n">root</span> <span class="o">==</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3.递归关系
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left_res</span> <span class="o">=</span> <span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right_res</span> <span class="o">=</span> <span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 拿到左右子树的结果, root要根据现有的信息再向上汇报
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">left_res</span> <span class="o">!=</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">right_res</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">left_res</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">left_res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">right_res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4-复杂度分析">4. 复杂度分析
+</h3><ul>
+<li><strong>时间复杂度</strong>：$O(N)$。在最坏情况下，需要遍历树中的所有节点。每个节点最多被访问一次。</li>
+<li><strong>空间复杂度</strong>：$O(H)$，其中 $H$ 是树的高度。这主要来自递归栈的深度。在最坏情况下（树倾斜），$H$ 可以是 $N$，所以空间复杂度为 $O(N)$。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+    <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day17/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day17</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day16/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day16</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day15/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day15</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day14/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day14</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day13/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day13</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Sophomoresty/Sophomoresty.io"
+    data-repo-id="R_kgDOOq9B4A"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOq9B4M4CqN6o"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="github-light"
+    data-lang="en"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('github-light');
+            } else {
+                setGiscusTheme('github-dark');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy;
+        
+        2025 靝Sol
+    </section>
+
+    <section class="powerby">
+        
+        去码头整点薯条 <br />
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+                data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/Sophomoresty.io/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

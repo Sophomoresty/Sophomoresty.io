@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n11_完全二叉树的节点个数_leetcode_222 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 #include &lt;queue&gt; using namespace std; struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {} }; class Solution { public: int countNodes(TreeNode *root) { if (root == nullptr) { return 0; } queue&lt;TreeNode *&gt; que; que.push(root); int node_count = 0; while (!que.empty()) { int size = que.size(); for (int i = 0; i &lt; size; i++) { TreeNode *cur = que.front(); que.pop(); node_count++; if (cur-&gt;left != nullptr) { que.push(cur-&gt;left); } if (cur-&gt;right != nullptr) { que.push(cur-&gt;right); } } } return node_count; } }; 12_平衡二叉树_leetcode_110 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 #include &lt;algorithm&gt; #include &lt;cstdlib&gt; using namespace std; struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {} }; class Solution { public: int get_height_postorder(TreeNode *root) { if (root == nullptr) { return 0; } int left_height = get_height_postorder(root-&gt;left); if (left_height == -1) { return -1; } int right_height = get_height_postorder(root-&gt;right); if (right_height == -1) { return -1; } if (abs(left_height - right_height) &gt; 1) { return -1; } return max(left_height, right_height) + 1; } bool isBalanced(TreeNode *root) { return get_height_postorder(root) != -1; } }; 13_二叉树的所有路径_leetcode_257 核心任务与方法 本题的核心任务是找出二叉树中所有从根节点到叶子节点的路径，并将它们以字符串的形式（例如 1-&gt;2-&gt;5）存储起来。我们采用的是 深度优先搜索 (DFS) 的思想，具体来说是前序递归。\n">
+<title>代码随想录_day15</title>
+
+<link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day15/'>
+
+<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="代码随想录_day15">
+<meta property='og:description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n11_完全二叉树的节点个数_leetcode_222 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 #include &lt;queue&gt; using namespace std; struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {} }; class Solution { public: int countNodes(TreeNode *root) { if (root == nullptr) { return 0; } queue&lt;TreeNode *&gt; que; que.push(root); int node_count = 0; while (!que.empty()) { int size = que.size(); for (int i = 0; i &lt; size; i++) { TreeNode *cur = que.front(); que.pop(); node_count++; if (cur-&gt;left != nullptr) { que.push(cur-&gt;left); } if (cur-&gt;right != nullptr) { que.push(cur-&gt;right); } } } return node_count; } }; 12_平衡二叉树_leetcode_110 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 #include &lt;algorithm&gt; #include &lt;cstdlib&gt; using namespace std; struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {} }; class Solution { public: int get_height_postorder(TreeNode *root) { if (root == nullptr) { return 0; } int left_height = get_height_postorder(root-&gt;left); if (left_height == -1) { return -1; } int right_height = get_height_postorder(root-&gt;right); if (right_height == -1) { return -1; } if (abs(left_height - right_height) &gt; 1) { return -1; } return max(left_height, right_height) + 1; } bool isBalanced(TreeNode *root) { return get_height_postorder(root) != -1; } }; 13_二叉树的所有路径_leetcode_257 核心任务与方法 本题的核心任务是找出二叉树中所有从根节点到叶子节点的路径，并将它们以字符串的形式（例如 1-&gt;2-&gt;5）存储起来。我们采用的是 深度优先搜索 (DFS) 的思想，具体来说是前序递归。\n">
+<meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day15/'>
+<meta property='og:site_name' content='靝Sol'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-06-05T14:24:02&#43;08:00'/><meta property='article:modified_time' content='2025-06-05T14:24:02&#43;08:00'/><meta property='og:image' content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
+<meta name="twitter:title" content="代码随想录_day15">
+<meta name="twitter:description" content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n11_完全二叉树的节点个数_leetcode_222 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 #include &lt;queue&gt; using namespace std; struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {} }; class Solution { public: int countNodes(TreeNode *root) { if (root == nullptr) { return 0; } queue&lt;TreeNode *&gt; que; que.push(root); int node_count = 0; while (!que.empty()) { int size = que.size(); for (int i = 0; i &lt; size; i++) { TreeNode *cur = que.front(); que.pop(); node_count++; if (cur-&gt;left != nullptr) { que.push(cur-&gt;left); } if (cur-&gt;right != nullptr) { que.push(cur-&gt;right); } } } return node_count; } }; 12_平衡二叉树_leetcode_110 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 #include &lt;algorithm&gt; #include &lt;cstdlib&gt; using namespace std; struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {} }; class Solution { public: int get_height_postorder(TreeNode *root) { if (root == nullptr) { return 0; } int left_height = get_height_postorder(root-&gt;left); if (left_height == -1) { return -1; } int right_height = get_height_postorder(root-&gt;right); if (right_height == -1) { return -1; } if (abs(left_height - right_height) &gt; 1) { return -1; } return max(left_height, right_height) + 1; } bool isBalanced(TreeNode *root) { return get_height_postorder(root) != -1; } }; 13_二叉树的所有路径_leetcode_257 核心任务与方法 本题的核心任务是找出二叉树中所有从根节点到叶子节点的路径，并将它们以字符串的形式（例如 1-&gt;2-&gt;5）存储起来。我们采用的是 深度优先搜索 (DFS) 的思想，具体来说是前序递归。\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
+    <link rel="shortcut icon" href="/lucy.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/Sophomoresty.io/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/Sophomoresty.io/img/lucy_hu_80d75fc8bcdaf374.png" width="300"
+                            height="273" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/Sophomoresty.io">靝Sol</a></h1>
+            <h2 class="site-description">Be What You Wanna Be</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://www.bilibili.com/'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1747382077492" class="icon" viewBox="0 0 1129 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1470" xmlns:xlink="http://www.w3.org/1999/xlink" width="220.5078125" height="200"><path d="M234.909 9.656a80.468 80.468 0 0 1 68.398 0 167.374 167.374 0 0 1 41.843 30.578l160.937 140.82h115.07l160.936-140.82a168.983 168.983 0 0 1 41.843-30.578A80.468 80.468 0 0 1 930.96 76.445a80.468 80.468 0 0 1-17.703 53.914 449.818 449.818 0 0 1-35.406 32.187 232.553 232.553 0 0 1-22.531 18.508h100.585a170.593 170.593 0 0 1 118.289 53.109 171.397 171.397 0 0 1 53.914 118.288v462.693a325.897 325.897 0 0 1-4.024 70.007 178.64 178.64 0 0 1-80.468 112.656 173.007 173.007 0 0 1-92.539 25.75h-738.7a341.186 341.186 0 0 1-72.421-4.024A177.835 177.835 0 0 1 28.91 939.065a172.202 172.202 0 0 1-27.36-92.539V388.662a360.498 360.498 0 0 1 0-66.789A177.03 177.03 0 0 1 162.487 178.64h105.414c-16.899-12.07-31.383-26.555-46.672-39.43a80.468 80.468 0 0 1-25.75-65.984 80.468 80.468 0 0 1 39.43-63.57M216.4 321.873a80.468 80.468 0 0 0-63.57 57.937 108.632 108.632 0 0 0 0 30.578v380.615a80.468 80.468 0 0 0 55.523 80.469 106.218 106.218 0 0 0 34.601 5.632h654.208a80.468 80.468 0 0 0 76.444-47.476 112.656 112.656 0 0 0 8.047-53.109v-354.06a135.187 135.187 0 0 0 0-38.625 80.468 80.468 0 0 0-52.304-54.719 129.554 129.554 0 0 0-49.89-7.242H254.22a268.764 268.764 0 0 0-37.82 0z m0 0" fill="#20B0E3" p-id="1471"></path><path d="M348.369 447.404a80.468 80.468 0 0 1 55.523 18.507 80.468 80.468 0 0 1 28.164 59.547v80.468a80.468 80.468 0 0 1-16.094 51.5 80.468 80.468 0 0 1-131.968-9.656 104.609 104.609 0 0 1-10.46-54.719v-80.468a80.468 80.468 0 0 1 70.007-67.593z m416.02 0a80.468 80.468 0 0 1 86.102 75.64v80.468a94.148 94.148 0 0 1-12.07 53.11 80.468 80.468 0 0 1-132.773 0 95.757 95.757 0 0 1-12.875-57.133V519.02a80.468 80.468 0 0 1 70.007-70.812z m0 0" fill="#20B0E3" p-id="1472"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Sophomoresty'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1747382114895" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2439" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M0 556.416C0 602.816 4.352 644.8 13.024 682.336 21.696 719.904 33.728 752.544 49.088 780.224 64.416 807.936 83.968 832.32 107.648 853.344 131.36 874.368 157.056 891.552 184.768 904.928 212.48 918.272 244.096 929.12 279.648 937.472 315.2 945.824 351.52 951.648 388.576 955.008 425.632 958.336 466.336 960 510.752 960 555.488 960 596.384 958.336 633.44 955.008 670.496 951.648 706.88 945.824 742.592 937.472 778.304 929.12 810.112 918.272 837.984 904.928 865.856 891.552 891.712 874.368 915.584 853.344 939.456 832.32 959.168 807.936 974.688 780.224 990.208 752.544 1002.304 719.904 1010.976 682.336 1019.648 644.8 1024 602.816 1024 556.416 1024 473.632 996.288 402.016 940.896 341.6 943.872 333.568 946.624 324.48 949.152 314.304 951.648 304.128 953.984 289.6 956.16 270.752 958.336 251.872 957.504 230.112 953.664 205.408 949.824 180.704 942.72 155.488 932.352 129.792L924.864 128.288C919.52 127.296 910.752 127.52 898.56 129.024 886.368 130.528 872.192 133.536 856 138.048 839.808 142.56 818.944 151.232 793.408 164.096 767.872 176.928 740.928 193.056 712.544 212.416 663.808 199.04 596.864 192.384 511.744 192.384 426.944 192.384 360.192 199.04 311.456 212.416 283.072 193.056 255.968 176.928 230.08 164.096 204.224 151.232 183.616 142.56 168.256 138.048 152.896 133.536 138.528 130.624 125.184 129.28 111.84 127.936 103.392 127.52 99.904 128.032 96.384 128.544 93.632 129.12 91.648 129.792 81.28 155.488 74.176 180.672 70.368 205.408 66.528 230.112 65.696 251.872 67.84 270.752 70.016 289.6 72.352 304.128 74.848 314.304 77.376 324.48 80.128 333.568 83.136 341.6 27.712 402.016 0 473.632 0 556.416ZM125.696 682.08C125.696 634.016 147.552 589.952 191.296 549.888 204.288 537.888 219.488 528.8 236.832 522.592 254.208 516.448 273.824 512.928 295.68 512.096 317.536 511.264 338.496 511.424 358.528 512.608 378.56 513.76 403.264 515.36 432.64 517.344 462.016 519.36 487.392 520.352 508.736 520.352 530.112 520.352 555.488 519.36 584.864 517.344 614.24 515.36 638.944 513.76 658.976 512.608 679.008 511.424 699.936 511.264 721.792 512.096 743.68 512.928 763.296 516.448 780.64 522.592 798.016 528.768 813.184 537.888 826.208 549.888 869.952 589.28 891.808 633.344 891.808 682.08 891.808 710.816 888.224 736.256 881.024 758.464 873.856 780.672 864.672 799.264 853.504 814.304 842.304 829.312 826.784 842.08 806.944 852.608 787.072 863.104 767.712 871.2 748.832 876.896 729.984 882.56 705.792 886.976 676.224 890.144 646.688 893.312 620.32 895.232 597.12 895.904 573.92 896.576 544.448 896.928 508.736 896.928 473.024 896.928 443.552 896.576 420.352 895.904 397.152 895.232 370.784 893.312 341.248 890.144 311.712 886.976 287.52 882.56 268.64 876.896 249.792 871.2 230.432 863.104 210.56 852.608 190.688 842.08 175.168 829.312 164 814.304 152.8 799.264 143.616 780.672 136.448 758.464 129.28 736.256 125.696 710.816 125.696 682.08ZM640 672A2 3 2520 1 0 768 672 2 3 2520 1 0 640 672zM256 672A2 3 2520 1 0 384 672 2 3 2520 1 0 256 672z" fill="#000000" p-id="2440"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/Sophomoresty.io/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Sophomoresty.io/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Sophomoresty.io/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>档案</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Sophomoresty.io/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜素</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Sophomoresty.io/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#11_完全二叉树的节点个数_leetcode_222">11_完全二叉树的节点个数_leetcode_222</a></li>
+    <li><a href="#12_平衡二叉树_leetcode_110">12_平衡二叉树_leetcode_110</a></li>
+    <li><a href="#13_二叉树的所有路径_leetcode_257">13_二叉树的所有路径_leetcode_257</a>
+      <ol>
+        <li><a href="#核心任务与方法">核心任务与方法</a></li>
+        <li><a href="#递归设计的三要素回顾">递归设计的三要素回顾</a></li>
+        <li><a href="#易错点与优化">易错点与优化</a></li>
+      </ol>
+    </li>
+    <li><a href="#15_左叶子之和_leetcode_15">15_左叶子之和_leetcode_15</a>
+      <ol>
+        <li><a href="#方案一前序递归自顶向下传递我是左孩子吗的状态">方案一：前序递归（自顶向下），传递“我是左孩子吗？”的状态</a></li>
+        <li><a href="#方案二后序递归自底向上在父节点进行判断和累加更巧妙">方案二：后序递归（自底向上），在父节点进行判断和累加（更巧妙）</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day15/">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" alt="Featured image of post 代码随想录_day15" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/Sophomoresty.io/categories/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" >
+                代码随想录
+            </a>
+        
+            <a href="/Sophomoresty.io/categories/c&#43;&#43;/" >
+                C&#43;&#43;
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day15/">代码随想录_day15</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 05, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 7 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>代码仓库: <a class="link" href="https://github.com/Sophomoresty/Algorithm_Exercises.git"  target="_blank" rel="noopener"
+    >https://github.com/Sophomoresty/Algorithm_Exercises.git</a></p>
+<h2 id="11_完全二叉树的节点个数_leetcode_222">11_完全二叉树的节点个数_leetcode_222
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">()</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countNodes</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">TreeNode</span> <span class="o">*&gt;</span> <span class="n">que</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">node_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">que</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">TreeNode</span> <span class="o">*</span><span class="n">cur</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">node_count</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">node_count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="12_平衡二叉树_leetcode_110">12_平衡二叉树_leetcode_110
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">()</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">get_height_postorder</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">left_height</span> <span class="o">=</span> <span class="n">get_height_postorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">left_height</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">right_height</span> <span class="o">=</span> <span class="n">get_height_postorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">right_height</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">left_height</span> <span class="o">-</span> <span class="n">right_height</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">max</span><span class="p">(</span><span class="n">left_height</span><span class="p">,</span> <span class="n">right_height</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">isBalanced</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">get_height_postorder</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="13_二叉树的所有路径_leetcode_257">13_二叉树的所有路径_leetcode_257
+</h2><h3 id="核心任务与方法">核心任务与方法
+</h3><p>本题的核心任务是找出二叉树中所有从根节点到叶子节点的路径，并将它们以字符串的形式（例如 <code>1-&gt;2-&gt;5</code>）存储起来。我们采用的是 <strong>深度优先搜索 (DFS)</strong> 的思想，具体来说是<strong>前序递归</strong>。</p>
+<h3 id="递归设计的三要素回顾">递归设计的三要素回顾
+</h3><p>在解决这个问题时，我们再次运用了递归的“三要素”原则，并对其中的关键点进行了完善：</p>
+<ol>
+<li>
+<p><strong>函数作用与参数 (<code>traversal(TreeNode* node, std::vector&lt;int&gt;&amp; current_path_vals)</code>)</strong></p>
+<ul>
+<li><strong>函数作用：</strong> 这个辅助函数的目标是，在当前 <code>node</code> 及其子树中，找到所有能到达叶子节点的路径，并将它们加入到全局的结果集 <code>res</code> 中。</li>
+<li><strong>参数 <code>node</code>：</strong> 当前正在访问的树节点。</li>
+<li><strong>参数 <code>current_path_vals</code>：</strong> 这是一个关键的 <strong>引用传递 (<code>&amp;</code>)</strong> 参数，它用于在不同递归层级间<strong>共享和累积</strong>从根节点到当前 <code>node</code> 的路径上的所有节点值。正是因为它是引用，我们才能在递归调用中修改同一个 <code>vector</code> 实例，避免了昂贵的<strong>按值复制</strong>开销。</li>
+</ul>
+</li>
+<li>
+<p><strong>终止条件 (Base Cases)</strong></p>
+<ul>
+<li><strong>空节点：</strong> <code>if (node == nullptr) { return; }</code>。这是最基本的递归出口，当路径走到尽头（空指针）时，停止探索。</li>
+<li><strong>叶子节点：</strong> <code>if (node-&gt;left == nullptr &amp;&amp; node-&gt;right == nullptr)</code>。这是找到一条完整路径的标志。当抵达叶子节点时，<code>current_path_vals</code> 中存储的就是从根到当前叶子的完整路径。此时，我们将其转化为字符串，并添加到最终结果集 <code>res</code> 中。</li>
+</ul>
+</li>
+<li>
+<p><strong>递归关系 (Recursive Step) 与回溯</strong>
+本题最核心的模式是 <strong>“添加 - 递归 - 回溯”</strong>，它完美地体现了前序遍历和状态管理：</p>
+<ul>
+<li>
+<p><strong>添加 (Pre-order / “根”操作)：</strong> <code>current_path_vals.push_back(node-&gt;val);</code></p>
+<ul>
+<li>在每次进入一个新节点 <code>node</code> 的递归函数时，我们都将其值加入到 <code>current_path_vals</code> 中。这代表了我们“向前”走了一步，将当前节点纳入路径。</li>
+</ul>
+</li>
+<li>
+<p><strong>递归 (DFS / “左”、“右”操作)：</strong>
+<code>traversal(node-&gt;left, current_path_vals);</code>
+<code>traversal(node-&gt;right, current_path_vals);</code></p>
+<ul>
+<li>在将当前节点加入路径后，我们递归地调用自身去探索其左子树和右子树，<strong>信任</strong>这些子调用会完成各自的任务。</li>
+</ul>
+</li>
+<li>
+<p><strong>回溯 (Post-order / “清理”操作)：</strong> <code>current_path_vals.pop_back();</code></p>
+<ul>
+<li>这是<strong>最关键</strong>的一步，它确保了共享状态 <code>current_path_vals</code> 的正确性。当一个节点 <code>node</code> 的所有子树（左子树和右子树）都探索完毕后，<code>node</code> 在<strong>当前路径</strong>上的职责就完成了。</li>
+<li>为了让<strong>父节点</strong>能够探索<strong>其他分支</strong>（例如，从 <code>node</code> 的父节点转向 <code>node</code> 的兄弟节点），我们需要将 <code>node</code> 从 <code>current_path_vals</code> 中移除，使 <code>current_path_vals</code> 恢复到 <code>node</code> <strong>被加入之前的状态</strong>。这就是“回溯”，它像橡皮擦一样擦去当前节点对路径的临时修改。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="易错点与优化">易错点与优化
+</h3><ul>
+<li><strong><code>path</code> 参数传递方式：</strong> 最初我们遇到的问题是 <code>vector&lt;int&gt; path</code> 按值传递，导致每次递归都复制整个 <code>vector</code>，且无法正确积累路径。修正为<strong>引用传递 (<code>vector&lt;int&gt;&amp; path</code>)</strong> 是解决此问题的关键。</li>
+<li><strong>回溯 <code>pop_back()</code> 的位置：</strong> 必须确保每次 <code>push_back()</code> 都有一个对应的 <code>pop_back()</code>，并且 <code>pop_back()</code> 发生在所有子递归调用完成之后。即，在函数<strong>即将返回之前</strong>。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">()</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1.参数root, path数组, 修改全局变量res
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">travesal</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2.终止条件1: 遇到空结点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">path</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3.终止条件2: 遇到叶子节点,开始将path数组转化为字符串, 加入到res中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">string</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">path</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">result</span> <span class="o">+=</span> <span class="n">to_string</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">path</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">result</span> <span class="o">+=</span> <span class="s">&#34;-&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 左
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">travesal</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 右
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">travesal</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">path</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">binaryTreePaths</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">path</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">travesal</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="15_左叶子之和_leetcode_15">15_左叶子之和_leetcode_15
+</h2><h3 id="方案一前序递归自顶向下传递我是左孩子吗的状态">方案一：前序递归（自顶向下），传递“我是左孩子吗？”的状态
+</h3><p>这种方案需要一个辅助函数和一个全局变量，类似于我们之前求深度的方式。</p>
+<ul>
+<li><strong><code>sumOfLeftLeaves(TreeNode* root)</code> 函数的作用：</strong> 遍历树，累加所有左叶子的值到全局变量 <code>total_sum</code>。</li>
+<li><strong>辅助函数 <code>dfs(TreeNode* node, bool is_left_child)</code>：</strong>
+<ul>
+<li><code>node</code>：当前节点。</li>
+<li><code>is_left_child</code>：布尔值，表示 <code>node</code> 是不是其父节点的左孩子。这个信息由父节点传递下来。</li>
+</ul>
+</li>
+<li><strong>累加时机：</strong> 当 <code>node</code> 是一个叶子节点，并且 <code>is_left_child</code> 为 <code>true</code> 时，才将 <code>node-&gt;val</code> 加到 <code>total_sum</code>。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"> </span><span class="c1">// For testing
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">total_sum_of_left_leaves</span><span class="p">;</span> <span class="c1">// 全局变量，累加所有左叶子之和
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @brief 辅助函数：使用前序递归遍历树，并根据节点是否是左孩子进行累加。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     *
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param node 当前访问的节点。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param is_left_child 布尔值，指示当前 node 是否为其父节点的左孩子。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">dfs_preorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">is_left_child</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 1. 终止条件 (Base Case):
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 如果当前节点是 nullptr，直接返回。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2. &#34;访问&#34;当前节点 (前序处理):
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 如果当前节点是叶子节点，并且它是一个左孩子，则将其值加入总和。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">is_left_child</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">total_sum_of_left_leaves</span> <span class="o">+=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3. 递归到左右子树:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 向左子树递归时，传递 true (表示左孩子)。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">dfs_preorder</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 向右子树递归时，传递 false (表示右孩子)。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">dfs_preorder</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @brief 计算所有左叶子之和的主函数。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     *
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param root 二叉树的根节点。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return int 所有左叶子之和。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">sumOfLeftLeaves</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">total_sum_of_left_leaves</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 每次调用清零
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 处理空树的情况
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 从根节点开始 DFS。根节点本身不是任何人的“左孩子”，所以传入 false。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">dfs_preorder</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">total_sum_of_left_leaves</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="方案二后序递归自底向上在父节点进行判断和累加更巧妙">方案二：后序递归（自底向上），在父节点进行判断和累加（更巧妙）
+</h3><p>这种方案利用后序递归的返回值。函数返回的是<strong>其子树中左叶子的和</strong>。</p>
+<ul>
+<li><strong><code>sumOfLeftLeaves(TreeNode* root)</code> 函数的作用：</strong> 返回以 <code>root</code> 为根的子树中<strong>所有左叶子的和</strong>。</li>
+<li><strong>累加时机：</strong> 当一个节点 <code>root</code> 接收到其左孩子 <code>root-&gt;left</code> 的返回值后，它自己判断 <code>root-&gt;left</code> 是否是左叶子。
+<ul>
+<li>如果 <code>root-&gt;left</code> 存在，且 <code>root-&gt;left</code> 是一个叶子节点，那么 <code>root-&gt;left-&gt;val</code> 就是一个左叶子，需要加到总和里。</li>
+<li>然后，加上 <code>root-&gt;left</code> 为根的子树中<strong>其余</strong>左叶子的和（递归调用 <code>sumOfLeftLeaves(root-&gt;left)</code> 的返回值），以及 <code>root-&gt;right</code> 为根的子树中所有左叶子的和。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"> </span><span class="c1">// For testing
+</span></span></span><span class="line"><span class="cl"><span class="c1">// TreeNode 定义 (假设已存在)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @brief 使用后序递归计算所有左叶子之和。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 函数返回以 root 为根的子树中所有左叶子的和。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     *
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param root 当前子树的根节点。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return int 当前子树中所有左叶子之和。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">sumOfLeftLeaves</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 1. 终止条件 (Base Case):
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 如果当前节点是 nullptr，它没有左叶子，返回 0。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2. 递归获取左右子树中左叶子之和 (后序遍历，左右):
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// sumOfLeftLeaves(root-&gt;left) 将返回以 root-&gt;left 为根的子树中所有左叶子的和。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">left_sum</span> <span class="o">=</span> <span class="n">sumOfLeftLeaves</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// sumOfLeftLeaves(root-&gt;right) 将返回以 root-&gt;right 为根的子树中所有左叶子的和。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">right_sum</span> <span class="o">=</span> <span class="n">sumOfLeftLeaves</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3. 处理当前节点 (后序遍历，根):
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 关键点：在这里判断 root 的左孩子是否是一个左叶子。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">current_node_contribution</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 如果 root 有左孩子，并且这个左孩子是一个叶子节点，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 那么这个左孩子就是一个“左叶子”，它自己的值需要被加上。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">!=</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">current_node_contribution</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 4. 返回总和：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 当前子树所有左叶子之和 = 左子树中左叶子之和 + 右子树中左叶子之和 + 当前节点左孩子作为左叶子的贡献。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">left_sum</span> <span class="o">+</span> <span class="n">right_sum</span> <span class="o">+</span> <span class="n">current_node_contribution</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="总结">总结
+</h3><p>我们之前的困惑在于，如何将“我是左孩子”这个信息传递给递归，并正确累加。</p>
+<ul>
+<li><strong>方案一（前序）：</strong> 通过在函数参数中传递 <code>is_left_child</code> 布尔值，自顶向下地告诉每个节点它的身份。在叶子节点处进行判断和累加。</li>
+<li><strong>方案二（后序）：</strong> 更巧妙。每个父节点自行判断其左孩子是否是左叶子，然后将这个值加上其左右子树递归返回的和。这样，<code>sumOfLeftLeaves(node)</code> 返回的就是 <code>node</code> 子树中所有左叶子的总  和。这种方法更符合你所说的“我相信它会返回正确结果”的后序递归模式。</li>
+</ul>
+<p>两种方案都能正确解决问题。方案二（后序递归）通常被认为是更简洁和优雅的解决方案，因为它避免了全局变量。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+    <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day18/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day18</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day17/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day17</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day16/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day16</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day14/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day14</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day13/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">代码随想录_day13</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Sophomoresty/Sophomoresty.io"
+    data-repo-id="R_kgDOOq9B4A"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOq9B4M4CqN6o"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="github-light"
+    data-lang="en"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('github-light');
+            } else {
+                setGiscusTheme('github-dark');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy;
+        
+        2025 靝Sol
+    </section>
+
+    <section class="powerby">
+        
+        去码头整点薯条 <br />
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+                data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/Sophomoresty.io/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
