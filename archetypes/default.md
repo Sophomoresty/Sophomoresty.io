@@ -10,4 +10,4 @@ categories = [
   "c++"
 ]
 +++
-代码仓库: <https://github.com/Sophomoresty/Algorithm_Exercises.git>
+代码仓库: git@github.com:Sophomoresty/Coding-Journal.git
