@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="代码仓库: git@github.com:Sophomoresty/Coding-Journal.git\n5 两两交换节点 1.判断是否能用递归解决\n问题分解同构 原问题和子问题的解存在关联 2.函数签名与规约 输入: 当前链表的头节点 输出: 两两交换后的链表头节点 3.归纳基础 空节点或则1个节点, 2个节点是不是基本情况? 不是, 不能直接得到平反解. 4.归纳证明 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 // leetcode_24_两两交换节点 struct ListNode { int val; ListNode *next; ListNode() : val(0), next(nullptr) {} ListNode(int x) : val(x), next(nullptr) {} ListNode(int x, ListNode *next) : val(x), next(next) {} }; /* 1. 判断是否能用递归解决 1) 问题分解同构 2) 原问题和子问题的解存在关联 2. 函数签名与规约 输入: 当前链表的头节点 输出: 两两交换后的链表头节点 3. 归纳基础 空节点或则1个节点, 2个节点是不是基本情况? 不是, 不能直接得到平反解. 4. 归纳证明 */ class Solution { public: ListNode *swapPairs(ListNode *head) { if (head == nullptr || head-&gt;next == nullptr) { return head; } ListNode *new_head = swapPairs(head-&gt;next-&gt;next); ListNode *temp = head-&gt;next; head-&gt;next = new_head; temp-&gt;next = head; return temp; } }; 6 删除链表倒数第n个节点 这是1个数学问题 这里全部按序号叙述, 设链表有$n_总$个节点\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="代码仓库: git@github.com:Sophomoresty/Coding-Journal.git\n5 两两交换节点 1.判断是否能用递归解决\n问题分解同构 原问题和子问题的解存在关联 2.函数签名与规约\n输入: 当前链表的头节点 输出: 两两交换后的链表头节点 3.归纳基础 空节点或则1个节点, 2个节点是不是基本情况?\n">
 <title>Coding Journal_day4</title>
 
 <link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/coding-journal_day4/'>
 
 <link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Coding Journal_day4">
-<meta property='og:description' content="代码仓库: git@github.com:Sophomoresty/Coding-Journal.git\n5 两两交换节点 1.判断是否能用递归解决\n问题分解同构 原问题和子问题的解存在关联 2.函数签名与规约 输入: 当前链表的头节点 输出: 两两交换后的链表头节点 3.归纳基础 空节点或则1个节点, 2个节点是不是基本情况? 不是, 不能直接得到平反解. 4.归纳证明 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 // leetcode_24_两两交换节点 struct ListNode { int val; ListNode *next; ListNode() : val(0), next(nullptr) {} ListNode(int x) : val(x), next(nullptr) {} ListNode(int x, ListNode *next) : val(x), next(next) {} }; /* 1. 判断是否能用递归解决 1) 问题分解同构 2) 原问题和子问题的解存在关联 2. 函数签名与规约 输入: 当前链表的头节点 输出: 两两交换后的链表头节点 3. 归纳基础 空节点或则1个节点, 2个节点是不是基本情况? 不是, 不能直接得到平反解. 4. 归纳证明 */ class Solution { public: ListNode *swapPairs(ListNode *head) { if (head == nullptr || head-&gt;next == nullptr) { return head; } ListNode *new_head = swapPairs(head-&gt;next-&gt;next); ListNode *temp = head-&gt;next; head-&gt;next = new_head; temp-&gt;next = head; return temp; } }; 6 删除链表倒数第n个节点 这是1个数学问题 这里全部按序号叙述, 设链表有$n_总$个节点\n">
+<meta property='og:description' content="代码仓库: git@github.com:Sophomoresty/Coding-Journal.git\n5 两两交换节点 1.判断是否能用递归解决\n问题分解同构 原问题和子问题的解存在关联 2.函数签名与规约\n输入: 当前链表的头节点 输出: 两两交换后的链表头节点 3.归纳基础 空节点或则1个节点, 2个节点是不是基本情况?\n">
 <meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/coding-journal_day4/'>
 <meta property='og:site_name' content='靝Sol'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-05T09:54:16&#43;08:00'/><meta property='article:modified_time' content='2025-09-05T09:54:16&#43;08:00'/><meta property='og:image' content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
 <meta name="twitter:title" content="Coding Journal_day4">
-<meta name="twitter:description" content="代码仓库: git@github.com:Sophomoresty/Coding-Journal.git\n5 两两交换节点 1.判断是否能用递归解决\n问题分解同构 原问题和子问题的解存在关联 2.函数签名与规约 输入: 当前链表的头节点 输出: 两两交换后的链表头节点 3.归纳基础 空节点或则1个节点, 2个节点是不是基本情况? 不是, 不能直接得到平反解. 4.归纳证明 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 // leetcode_24_两两交换节点 struct ListNode { int val; ListNode *next; ListNode() : val(0), next(nullptr) {} ListNode(int x) : val(x), next(nullptr) {} ListNode(int x, ListNode *next) : val(x), next(next) {} }; /* 1. 判断是否能用递归解决 1) 问题分解同构 2) 原问题和子问题的解存在关联 2. 函数签名与规约 输入: 当前链表的头节点 输出: 两两交换后的链表头节点 3. 归纳基础 空节点或则1个节点, 2个节点是不是基本情况? 不是, 不能直接得到平反解. 4. 归纳证明 */ class Solution { public: ListNode *swapPairs(ListNode *head) { if (head == nullptr || head-&gt;next == nullptr) { return head; } ListNode *new_head = swapPairs(head-&gt;next-&gt;next); ListNode *temp = head-&gt;next; head-&gt;next = new_head; temp-&gt;next = head; return temp; } }; 6 删除链表倒数第n个节点 这是1个数学问题 这里全部按序号叙述, 设链表有$n_总$个节点\n"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="代码仓库: git@github.com:Sophomoresty/Coding-Journal.git\n5 两两交换节点 1.判断是否能用递归解决\n问题分解同构 原问题和子问题的解存在关联 2.函数签名与规约\n输入: 当前链表的头节点 输出: 两两交换后的链表头节点 3.归纳基础 空节点或则1个节点, 2个节点是不是基本情况?\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://Sophomoresty.github.io/Sophomoresty.io/img/code.jpg' />
     <link rel="shortcut icon" href="/lucy.ico" />
 
@@ -355,17 +355,17 @@
 </h2><p><strong>1.判断是否能用递归解决</strong></p>
 <ol>
 <li>问题分解同构</li>
-<li>原问题和子问题的解存在关联
-<strong>2.函数签名与规约</strong></li>
+<li>原问题和子问题的解存在关联</li>
 </ol>
+<p><strong>2.函数签名与规约</strong></p>
 <ul>
 <li>输入: 当前链表的头节点</li>
-<li>输出: 两两交换后的链表头节点
-<strong>3.归纳基础</strong>
-空节点或则1个节点, 2个节点是不是基本情况?
-不是, 不能直接得到平反解.
-<strong>4.归纳证明</strong></li>
+<li>输出: 两两交换后的链表头节点</li>
 </ul>
+<p><strong>3.归纳基础</strong>
+空节点或则1个节点, 2个节点是不是基本情况?</p>
+<p>不是, 不能直接得到平反解.</p>
+<p><strong>4.归纳证明</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1

@@ -707,20 +707,20 @@
 </h2><p><strong>1.判断是否可以用递归</strong></p>
 <ol>
 <li>原问题是否可以划分结构相同的子问题, 可以, 翻转n个节点与翻转n-1个节点, 本质是一类问题</li>
-<li>假设子问题解决后, 是否能解决原问题
-<strong>2.函数签名与规约</strong></li>
+<li>假设子问题解决后, 是否能解决原问题</li>
 </ol>
+<p><strong>2.函数签名与规约</strong></p>
 <ul>
 <li>输入: 当前链表的头节点</li>
-<li>输出: 反转链表后的头节点 <code>归纳假设</code>
-<strong>3.处理基本情况, 归纳基础</strong>
-处理最基本情况, 2个节点反转, 0和1个节点,直接返回
-<strong>4.归纳证明</strong>
+<li>输出: 反转链表后的头节点 <code>归纳假设</code></li>
+</ul>
+<p><strong>3.处理基本情况, 归纳基础</strong>
+处理最基本情况, 2个节点反转, 0和1个节点,直接返回</p>
+<p><strong>4.归纳证明</strong>
 我们需要反转1-n个节点
 假设1-n个节点已经反转, 所以只需要让2-n个尾节点指向1, 1指向空
 head-&gt;next-&gt;next =head;
-head-&gt;next =nullptr</li>
-</ul>
+head-&gt;next =nullptr</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
