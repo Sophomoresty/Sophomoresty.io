@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day9/'>
 
-<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="代码随想录_day9">
+<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="代码随想录_day9">
 <meta property='og:description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n4_翻转字符串里的单词_leetcode_151 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; class Solution { public: string reverseWords(string s) { // 1.去除空格 int slow, fast; for (slow = fast = 0; fast &lt; s.size(); fast++) { // fast遇到的不是空格, 也就是我们要加入新数组中的元素 // 除了第一个单词, 其余单词的首字母前面都要加个空格 if (s[fast] != &#39; &#39;) { // 处理首字母 // slow==0, 意味着此时加入的是第1个单词 if (slow == 0) { s[slow++] = s[fast++]; } // slow !=0 else { s[slow++] = &#39; &#39;; } // 处理该单词剩余的字母, 这里主要fast不要超出s.size() while (fast &lt; s.size() &amp;&amp; s[fast] != &#39; &#39;) { s[slow++] = s[fast++]; } } } // slow是新字符串的长度 s.resize(slow); // 反转整个字符串, 再反转每个不含空格的子串 // 2.反转整个字符串 reverse(s.begin(), s.end()); // 现在是反转空格隔开的子串 int begin = 0; // 3.反转子串 for (int i = 0; i &lt; s.size(); i++) { // 最后一个单词后面没有空格 if (s[i] == &#39; &#39;) { reverse(s.begin() + begin, s.begin() + i); begin = i + 1; // 反转后更新字符串的起始点 } if (i == s.size() - 1) { reverse(s.begin() + begin, s.end()); } } return s; } }; int main() { string s = &#34; the sky is blue! &#34;; Solution sol; string s_res = sol.reverseWords(s); cout &lt;&lt; s_res &lt;&lt; &#39;\\n&#39;; } 5_右旋字符 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 #include &lt;algorithm&gt; #include &lt;iostream&gt; #include &lt;string&gt; using namespace std; int main() { ios_base::sync_with_stdio(false); cin.tie(nullptr); int k; string s; cin &gt;&gt; k; cin &gt;&gt; s; reverse(s.begin(), s.end()); reverse(s.begin(), s.begin() + k); reverse(s.begin() + k, s.end()); cout &lt;&lt; s &lt;&lt; &#39;\\n&#39;; } 6_实现strStr_leetcode_28 非常重要 1. KMP 算法的核心思想 目标： 在主串 haystack 中查找模式串 needle 的第一次出现位置。 朴素算法的低效： 当模式串失配时，朴素算法会同时回溯主串和模式串指针，导致重复比较。 KMP 的优化： 在失配时，不回溯主串指针 i。 仅仅根据模式串自身的结构信息（通过 next 数组），高效地回溯模式串指针 j，让模式串在主串上“滑动”，避免重复比较，从而实现线性的时间复杂度。 2. next 数组 (LPS 数组) 的构建 (get_next 函数) next 数组是 KMP 算法的“灵魂”，它存储了模式串自身的匹配信息，用于指导失配时的回溯。\n">
 <meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day9/'>
 <meta property='og:site_name' content='靝Sol'>
@@ -949,6 +949,44 @@
             
                 
 <article class="has-image">
+    <a href="/Sophomoresty.io/p/coding-journal_day4/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Coding Journal_day4</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/coding-journal_day3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Coding Journal_day3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/Sophomoresty.io/p/coding-journal_day2/">
         
         
@@ -999,44 +1037,6 @@
 
         <div class="article-details">
             <h2 class="article-title">代码随想录_day18</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day17/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">代码随想录_day17</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day16/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">代码随想录_day16</h2>
         </div>
     </a>
 </article>

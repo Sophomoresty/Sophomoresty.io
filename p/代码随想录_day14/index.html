@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day14/'>
 
-<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="代码随想录_day14">
+<link rel="stylesheet" href="/Sophomoresty.io/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="代码随想录_day14">
 <meta property='og:description' content="代码仓库: https://github.com/Sophomoresty/Algorithm_Exercises.git\n6_对称二叉树_leetcode_101 问题： 判断一棵二叉树是否是镜像对称的。\n1. 初始思路与分析 思路： 使用层次遍历（BFS），将每一层的所有节点值都保存到一个 vector&lt;vector&lt;int&gt;&gt; 中。然后，遍历这个二维 vector，对每一层的 vector&lt;int&gt; 进行双指针检查，判断是否回文（对称）。 isSymmetric 函数中的问题点： nullptr 信息丢失： temp 向量只存储了非空节点的值。当一个节点是 nullptr 但其兄弟节点非 nullptr 时，这种不对称信息会丢失，导致错误判断（例如 [null, 3] 会被当成 [3] 对称）。 双指针循环条件错误： for(left=0,right=temp.size()-1 ; left &lt; temp.size(); ...) 应该修正为 left &lt; right。 根节点为空处理： if (root == nullptr) { return false; } 应为 return true; (空树对称)。 2. 优化的 BFS 策略：“同时入队对称节点” 针对 nullptr 信息丢失和提高效率的问题，我们探讨并实现了一种更优、更高级的 BFS 策略：\n">
 <meta property='og:url' content='https://Sophomoresty.github.io/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day14/'>
 <meta property='og:site_name' content='靝Sol'>
@@ -1231,6 +1231,44 @@
             
                 
 <article class="has-image">
+    <a href="/Sophomoresty.io/p/coding-journal_day4/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Coding Journal_day4</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/Sophomoresty.io/p/coding-journal_day3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Coding Journal_day3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/Sophomoresty.io/p/coding-journal_day2/">
         
         
@@ -1281,44 +1319,6 @@
 
         <div class="article-details">
             <h2 class="article-title">代码随想录_day18</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day17/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">代码随想录_day17</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/Sophomoresty.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95_day16/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/Sophomoresty.io/img/code.jpg" loading="lazy" data-key="" data-hash="/Sophomoresty.io/img/code.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">代码随想录_day16</h2>
         </div>
     </a>
 </article>
