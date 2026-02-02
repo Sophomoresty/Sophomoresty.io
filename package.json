@@ -1,0 +1,26 @@
+{
+  "name": "sophomoresty.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sophomoresty/Sophomoresty.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sophomoresty/Sophomoresty.io/issues"
+  },
+  "homepage": "https://github.com/Sophomoresty/Sophomoresty.io#readme",
+  "description": "",
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
