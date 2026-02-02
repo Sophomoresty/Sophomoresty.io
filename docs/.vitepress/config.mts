@@ -10,11 +10,20 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '博客', link: '/blog/' },
+      { text: '分类', link: '/blog/categories/' },
+      { text: '标签', link: '/blog/tags/' },
       { text: '关于', link: '/about/' }
     ],
 
     sidebar: {
       '/blog/': [
+        {
+          text: '📂 分类浏览',
+          items: [
+            { text: '全部分类', link: '/blog/categories/' },
+            { text: '全部标签', link: '/blog/tags/' }
+          ]
+        },
         {
           text: '📚 学习笔记',
           collapsible: true,
