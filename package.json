@@ -10,15 +10,15 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sophomoresty/Sophomoresty.io.git"
+    "url": "git+https://github.com/Sophomoresty/Sophomoresty.github.io.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Sophomoresty/Sophomoresty.io/issues"
+    "url": "https://github.com/Sophomoresty/Sophomoresty.github.io/issues"
   },
-  "homepage": "https://github.com/Sophomoresty/Sophomoresty.io#readme",
+  "homepage": "https://github.com/Sophomoresty/Sophomoresty.github.io#readme",
   "description": "",
   "devDependencies": {
     "vitepress": "^1.6.4"
